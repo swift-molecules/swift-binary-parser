@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "swift-binary-parser-primitives",
+    name: "swift-binary-parser",
     platforms: [
         .macOS(.v27),
         .iOS(.v27),
@@ -13,228 +13,228 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "Binary Parser Primitives",
-            targets: ["Binary Parser Primitives"]
+            name: "Binary Parser",
+            targets: ["Binary Parser"]
         ),
         .library(
-            name: "Binary Parseable Primitives",
-            targets: ["Binary Parseable Primitives"]
+            name: "Binary Parseable",
+            targets: ["Binary Parseable"]
         ),
         .library(
-            name: "Binary Input Primitives",
-            targets: ["Binary Input Primitives"]
+            name: "Binary Input",
+            targets: ["Binary Input"]
         ),
         .library(
-            name: "Binary Machine Primitives",
-            targets: ["Binary Machine Primitives"]
+            name: "Binary Machine",
+            targets: ["Binary Machine"]
         ),
         .library(
-            name: "Binary Borrowed Primitives",
-            targets: ["Binary Borrowed Primitives"]
+            name: "Binary Borrowed",
+            targets: ["Binary Borrowed"]
         ),
         .library(
-            name: "Binary Parse Primitives",
-            targets: ["Binary Parse Primitives"]
+            name: "Binary Parse",
+            targets: ["Binary Parse"]
         ),
         .library(
-            name: "Binary Integer Primitives",
-            targets: ["Binary Integer Primitives"]
+            name: "Binary Integer",
+            targets: ["Binary Integer"]
         ),
         .library(
-            name: "Binary Parser Primitives Test Support",
-            targets: ["Binary Parser Primitives Test Support"]
+            name: "Binary Parser Test Support",
+            targets: ["Binary Parser Test Support"]
         ),
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-primitives/swift-parser-primitives.git",
+            url: "https://github.com/swift-molecules/swift-parser.git",
             branch: "main"
         ),
 
         .package(
-            url: "https://github.com/swift-primitives/swift-binary-primitives.git",
+            url: "https://github.com/swift-molecules/swift-binary.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-binary-leb128-primitives.git",
+            url: "https://github.com/swift-molecules/swift-binary-leb128.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-machine-primitives.git",
+            url: "https://github.com/swift-molecules/swift-machine.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-vector-primitives.git",
+            url: "https://github.com/swift-molecules/swift-vector.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-index-primitives.git",
+            url: "https://github.com/swift-molecules/swift-index.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-byte-primitives.git",
-            branch: "main"
-        ),
-
-        .package(
-            url: "https://github.com/swift-primitives/swift-byte-parser-primitives.git",
-            branch: "main"
-        ),
-        .package(
-            url: "https://github.com/swift-primitives/swift-span-primitives.git",
-            branch: "main"
-        ),
-        .package(
-            url: "https://github.com/swift-primitives/swift-buffer-linear-primitives.git",
+            url: "https://github.com/swift-molecules/swift-byte.git",
             branch: "main"
         ),
 
         .package(
-            url: "https://github.com/swift-primitives/swift-ownership-shared-primitives.git",
+            url: "https://github.com/swift-molecules/swift-byte-parser.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-molecules/swift-span.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-molecules/swift-buffer-linear.git",
+            branch: "main"
+        ),
+
+        .package(
+            url: "https://github.com/swift-molecules/swift-ownership-shared.git",
             branch: "main"
         ),
     ],
     targets: [
 
         .target(
-            name: "Binary Input Primitives",
+            name: "Binary Input",
             dependencies: [
 
-                .product(name: "Binary Primitives", package: "swift-binary-primitives"),
-                .product(name: "Parser Primitives", package: "swift-parser-primitives"),
-                .product(name: "Byte Parser Primitives", package: "swift-byte-parser-primitives"),
+                .product(name: "Binary", package: "swift-binary"),
+                .product(name: "Parser", package: "swift-parser"),
+                .product(name: "Byte Parser", package: "swift-byte-parser"),
             ]
         ),
 
         .target(
-            name: "Binary Machine Primitives",
+            name: "Binary Machine",
             dependencies: [
-                "Binary Input Primitives",
-                .product(name: "Byte Parser Primitives", package: "swift-byte-parser-primitives"),
-                .product(name: "Machine Primitives", package: "swift-machine-primitives"),
-                .product(name: "Vector Primitives", package: "swift-vector-primitives"),
+                "Binary Input",
+                .product(name: "Byte Parser", package: "swift-byte-parser"),
+                .product(name: "Machine", package: "swift-machine"),
+                .product(name: "Vector", package: "swift-vector"),
                 .product(
-                    name: "Byte Primitives Standard Library Integration",
-                    package: "swift-byte-primitives"
+                    name: "Byte Standard Library Integration",
+                    package: "swift-byte"
                 ),
                 .product(
-                    name: "Binary LEB128 Decode Primitives",
-                    package: "swift-binary-leb128-primitives"
+                    name: "Binary LEB128 Decode",
+                    package: "swift-binary-leb128"
                 ),
                 .product(
                     name: "Buffer Linear Primitive",
-                    package: "swift-buffer-linear-primitives"
+                    package: "swift-buffer-linear"
                 ),
                 .product(
-                    name: "Buffer Linear Primitives",
-                    package: "swift-buffer-linear-primitives"
+                    name: "Buffer Linear",
+                    package: "swift-buffer-linear"
                 ),
                 .product(
                     name: "Ownership Shared Primitive",
-                    package: "swift-ownership-shared-primitives"
+                    package: "swift-ownership-shared"
                 ),
             ]
         ),
         .target(
-            name: "Binary Borrowed Primitives",
+            name: "Binary Borrowed",
             dependencies: [
-                "Binary Machine Primitives",
-                .product(name: "Byte Parser Primitives", package: "swift-byte-parser-primitives"),
-                .product(name: "Vector Primitive", package: "swift-vector-primitives"),
+                "Binary Machine",
+                .product(name: "Byte Parser", package: "swift-byte-parser"),
+                .product(name: "Vector Primitive", package: "swift-vector"),
                 .product(
-                    name: "Byte Primitives Standard Library Integration",
-                    package: "swift-byte-primitives"
+                    name: "Byte Standard Library Integration",
+                    package: "swift-byte"
                 ),
                 .product(
-                    name: "Binary LEB128 Decode Primitives",
-                    package: "swift-binary-leb128-primitives"
+                    name: "Binary LEB128 Decode",
+                    package: "swift-binary-leb128"
                 ),
 
-                .product(name: "Span Protocol Primitives", package: "swift-span-primitives"),
+                .product(name: "Span Protocol", package: "swift-span"),
             ]
         ),
 
         .target(
-            name: "Binary Parse Primitives",
+            name: "Binary Parse",
             dependencies: [
-                "Binary Input Primitives",
+                "Binary Input",
                 .product(
                     name: "Buffer Linear Primitive",
-                    package: "swift-buffer-linear-primitives"
+                    package: "swift-buffer-linear"
                 ),
                 .product(
-                    name: "Buffer Linear Primitives",
-                    package: "swift-buffer-linear-primitives"
+                    name: "Buffer Linear",
+                    package: "swift-buffer-linear"
                 ),
                 .product(
                     name: "Ownership Shared Primitive",
-                    package: "swift-ownership-shared-primitives"
+                    package: "swift-ownership-shared"
                 ),
             ]
         ),
 
         .target(
-            name: "Binary Parseable Primitives",
+            name: "Binary Parseable",
             dependencies: [
-                "Binary Parse Primitives",
-                .product(name: "Binary Primitives", package: "swift-binary-primitives"),
-                .product(name: "Byte Primitives", package: "swift-byte-primitives"),
+                "Binary Parse",
+                .product(name: "Binary", package: "swift-binary"),
+                .product(name: "Byte", package: "swift-byte"),
                 .product(
-                    name: "Byte Primitives Standard Library Integration",
-                    package: "swift-byte-primitives"
+                    name: "Byte Standard Library Integration",
+                    package: "swift-byte"
                 ),
             ]
         ),
 
         .target(
-            name: "Binary Integer Primitives",
+            name: "Binary Integer",
             dependencies: [
-                "Binary Parse Primitives",
+                "Binary Parse",
 
                 .product(
-                    name: "Binary LEB128 Primitives",
-                    package: "swift-binary-leb128-primitives"
+                    name: "Binary LEB128",
+                    package: "swift-binary-leb128"
                 ),
             ]
         ),
 
         .target(
-            name: "Binary Parser Primitives",
+            name: "Binary Parser",
             dependencies: [
 
-                "Binary Input Primitives",
-                "Binary Machine Primitives",
-                "Binary Borrowed Primitives",
-                "Binary Parse Primitives",
-                "Binary Parseable Primitives",
-                "Binary Integer Primitives",
+                "Binary Input",
+                "Binary Machine",
+                "Binary Borrowed",
+                "Binary Parse",
+                "Binary Parseable",
+                "Binary Integer",
             ]
         ),
 
         .target(
-            name: "Binary Parser Primitives Test Support",
+            name: "Binary Parser Test Support",
             dependencies: [
-                "Binary Parser Primitives",
-                "Binary Parseable Primitives",
+                "Binary Parser",
+                "Binary Parseable",
                 .product(
-                    name: "Binary Primitives Test Support",
-                    package: "swift-binary-primitives"
+                    name: "Binary Test Support",
+                    package: "swift-binary"
                 ),
                 .product(
-                    name: "Byte Primitives Standard Library Integration",
-                    package: "swift-byte-primitives"
+                    name: "Byte Standard Library Integration",
+                    package: "swift-byte"
                 ),
-                .product(name: "Index Primitives Test Support", package: "swift-index-primitives"),
+                .product(name: "Index Test Support", package: "swift-index"),
             ],
             path: "Tests/Support"
         ),
         .testTarget(
-            name: "Binary Input Primitives Tests",
-            dependencies: ["Binary Parser Primitives Test Support"]
+            name: "Binary Input Tests",
+            dependencies: ["Binary Parser Test Support"]
         ),
         .testTarget(
-            name: "Binary Borrowed Primitives Tests",
-            dependencies: ["Binary Parser Primitives Test Support"]
+            name: "Binary Borrowed Tests",
+            dependencies: ["Binary Parser Test Support"]
         ),
     ],
     swiftLanguageModes: [.v6]

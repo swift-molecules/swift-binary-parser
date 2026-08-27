@@ -1,8 +1,8 @@
-# swift-binary-parser-primitives
+# swift-binary-parser
 
 ![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
 
-Binary parsing primitives — the `Binary.Parseable` byte-stream deserialization protocol, the closure-based `Binary.Parser<Value>` witness, and the `Binary.Machine` defunctionalized engine that parses borrowed byte cursors without crossing a closure boundary.
+Binary parsing molecules — the `Binary.Parseable` byte-stream deserialization protocol, the closure-based `Binary.Parser<Value>` witness, and the `Binary.Machine` defunctionalized engine that parses borrowed byte cursors without crossing a closure boundary.
 
 ---
 
@@ -22,7 +22,7 @@ Binary parsing primitives — the `Binary.Parseable` byte-stream deserialization
 Stdlib integers conform to `Binary.Parseable` out of the box, and the byte source acts as a cursor — parsing consumes the prefix and advances it. Conform your own types by reading fields from that same cursor:
 
 ```swift
-import Binary_Parseable_Primitives
+import Binary_Parseable
 
 // Canonical little-endian, consuming the prefix.
 var bytes: [Byte] = [0x78, 0x56, 0x34, 0x12]
@@ -43,7 +43,7 @@ extension Header: Binary.Parseable {
 }
 ```
 
-`Binary.Parseable` lives in the `Binary Parseable Primitives` module, which is imported on its own; the umbrella `Binary Parser Primitives` re-exports the witness, machine, parse-access, and integer modules.
+`Binary.Parseable` lives in the `Binary Parseable` module, which is imported on its own; the umbrella `Binary Parser` re-exports the witness, machine, parse-access, and integer modules.
 
 ---
 
@@ -51,7 +51,7 @@ extension Header: Binary.Parseable {
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/swift-primitives/swift-binary-parser-primitives.git", branch: "main")
+    .package(url: "https://github.com/swift-molecules/swift-binary-parser.git", branch: "main")
 ]
 ```
 
@@ -59,7 +59,7 @@ dependencies: [
 .target(
     name: "YourTarget",
     dependencies: [
-        .product(name: "Binary Parser Primitives", package: "swift-binary-parser-primitives"),
+        .product(name: "Binary Parser", package: "swift-binary-parser"),
     ]
 )
 ```
@@ -74,16 +74,16 @@ Seven library products plus a test-support module. Each product maps to a same-n
 
 | Product | Purpose |
 |---------|---------|
-| `Binary Parser Primitives` | Umbrella. `@_exported` re-exports the Input, Machine, Borrowed, Parse, and Integer modules plus `Binary`, the `Byte Parser` substrate, `Parser`, and the `Binary.LEB128` namespace. |
-| `Binary Parseable Primitives` | The `Binary.Parseable` streaming-deserialization protocol, its `Binary.Parse.Failure` typed error, and stdlib / `Tagged` / `Array` conformances. Imported on its own — the umbrella does not re-export it. |
-| `Binary Parse Primitives` | The `Binary.Parse` namespace: `Binary.Parse.Access` ergonomics (`parse.whole` / `parse.prefix`), `Binary.Parse.Error`, and validation / conversion / variable-length helpers. |
-| `Binary Machine Primitives` | The `Binary.Parser<Value>` closure witness and the `Binary.Machine` defunctionalized engine (`Instruction`, `Program`, `Fault`, builders, combinators). |
-| `Binary Borrowed Primitives` | The borrowed-`Span` parse engine, extending the span protocol for `~Escapable` byte views. |
-| `Binary Input Primitives` | Re-export shim surfacing `Byte.Input` and the parser substrate for source compatibility. |
-| `Binary Integer Primitives` | Integer parsers — `Binary.Parse.Inline<Count, Element>` for fixed-size `InlineArray`, plus the re-exported `Binary.LEB128` variable-length namespace. |
-| `Binary Parser Primitives Test Support` | Re-exports the targets for test consumers. |
+| `Binary Parser` | Umbrella. `@_exported` re-exports the Input, Machine, Borrowed, Parse, and Integer modules plus `Binary`, the `Byte Parser` substrate, `Parser`, and the `Binary.LEB128` namespace. |
+| `Binary Parseable` | The `Binary.Parseable` streaming-deserialization protocol, its `Binary.Parse.Failure` typed error, and stdlib / `Tagged` / `Array` conformances. Imported on its own — the umbrella does not re-export it. |
+| `Binary Parse` | The `Binary.Parse` namespace: `Binary.Parse.Access` ergonomics (`parse.whole` / `parse.prefix`), `Binary.Parse.Error`, and validation / conversion / variable-length helpers. |
+| `Binary Machine` | The `Binary.Parser<Value>` closure witness and the `Binary.Machine` defunctionalized engine (`Instruction`, `Program`, `Fault`, builders, combinators). |
+| `Binary Borrowed` | The borrowed-`Span` parse engine, extending the span protocol for `~Escapable` byte views. |
+| `Binary Input` | Re-export shim surfacing `Byte.Input` and the parser substrate for source compatibility. |
+| `Binary Integer` | Integer parsers — `Binary.Parse.Inline<Count, Element>` for fixed-size `InlineArray`, plus the re-exported `Binary.LEB128` variable-length namespace. |
+| `Binary Parser Test Support` | Re-exports the targets for test consumers. |
 
-Import the narrowest product you need: `Binary Parseable Primitives` for the protocol path, the umbrella `Binary Parser Primitives` for the witness, machine, and integer parsers.
+Import the narrowest product you need: `Binary Parseable` for the protocol path, the umbrella `Binary Parser` for the witness, machine, and integer parsers.
 
 ---
 
