@@ -140,7 +140,7 @@ let package = Package(
             dependencies: [
                 "Binary Machine",
                 .product(name: "Byte Parser", package: "swift-byte-parser"),
-                .product(name: "Vector Primitive", package: "swift-vector"),
+                .product(name: "Vector", package: "swift-vector"),
                 .product(
                     name: "Byte Standard Library Integration",
                     package: "swift-byte"
