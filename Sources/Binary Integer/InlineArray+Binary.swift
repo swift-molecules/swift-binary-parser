@@ -1,3 +1,5 @@
+public import Binary_Endianness
+
 extension InlineArray where Element: FixedWidthInteger {
 
     @inlinable
@@ -19,13 +21,13 @@ extension InlineArray where Element: FixedWidthInteger {
             switch endianness {
             case .little:
                 (0..<elementSize).forEach { j in
-                    value |= Element(truncatingIfNeeded: input[base + j].underlying) << (j * 8)
+                    value |= Element(truncatingIfNeeded: input[base + j].bitPattern) << (j * 8)
                 }
 
             case .big:
                 (0..<elementSize).forEach { j in
                     value |=
-                        Element(truncatingIfNeeded: input[base + j].underlying)
+                        Element(truncatingIfNeeded: input[base + j].bitPattern)
                         << ((elementSize - 1 - j) * 8)
                 }
             }

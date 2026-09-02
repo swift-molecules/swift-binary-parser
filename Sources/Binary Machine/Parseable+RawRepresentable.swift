@@ -1,4 +1,6 @@
 public import Byte_Parser
+public import Cardinal
+public import Ordinal_Protocol
 
 extension Parseable where Self: RawRepresentable, Self.RawValue: FixedWidthInteger {
 

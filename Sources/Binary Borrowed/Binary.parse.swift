@@ -1,12 +1,14 @@
 public import Binary_LEB128_Decode
 public import Byte
 public import Byte_Standard_Library_Integration
+public import Cardinal
 public import Cursor
 internal import Index
 public import Machine
+public import Ordinal_Protocol
 public import Span_Protocol
-import Standard_Library_Extensions
-public import Vector_Primitive
+public import Standard_Library_Extensions
+public import Vector
 
 @usableFromInline
 let _two: Index<Byte>.Count = Index<Byte>.Count(Cardinal(2))
@@ -365,7 +367,7 @@ extension Span.`Protocol` where Self: ~Copyable & ~Escapable, Element == Byte {
                     if remaining < .one {
                         instructionError = .insufficientBytes(need: .one, have: remaining)
                     } else {
-                        let b = view.consume().underlying
+                        let b = view.consume().bitPattern
                         consumed += .one
                         pendingHandle = arena.allocate(Value.make(b))
                     }
@@ -545,7 +547,7 @@ extension Span.`Protocol` where Self: ~Copyable & ~Escapable, Element == Byte {
                             let byte = view.consume()
                             consumed += .one
                             done = try Binary.LEB128.Decode.unsigned(
-                                byte: byte.underlying,
+                                byte: byte.bitPattern,
                                 into: &result,
                                 shift: &shift
                             )
@@ -568,7 +570,7 @@ extension Span.`Protocol` where Self: ~Copyable & ~Escapable, Element == Byte {
                             let byte = view.consume()
                             consumed += .one
                             done = try Binary.LEB128.Decode.signed(
-                                byte: byte.underlying,
+                                byte: byte.bitPattern,
                                 into: &result,
                                 shift: &shift
                             )

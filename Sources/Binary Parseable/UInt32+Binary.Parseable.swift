@@ -1,3 +1,7 @@
+import Binary_Endianness
+import Binary_Standard_Library_Integration
+import Byte
+
 extension UInt32: Binary.Parseable {
 
     public static func parse<Source: RangeReplaceableCollection>(

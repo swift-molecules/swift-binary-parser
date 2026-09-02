@@ -1,9 +1,11 @@
 internal import Binary_LEB128_Decode
 public import Byte
-import Byte_Standard_Library_Integration
+public import Byte_Standard_Library_Integration
+public import Cardinal
 internal import Index
 public import Machine
-import Parser
+public import Ordinal_Protocol
+public import Parser
 
 @inline(__always)
 private func advanceProvenInBounds<Input: Input.Input.`Protocol`>(
@@ -322,7 +324,7 @@ extension Binary.Machine {
                         instructionError = .insufficientBytes(need: .one, have: remaining)
                     } else {
                         let byte = advanceProvenInBounds(&input)
-                        pendingHandle = arena.allocate(Value.make(byte.underlying))
+                        pendingHandle = arena.allocate(Value.make(byte.bitPattern))
                     }
 
                 case .u16le:
@@ -519,7 +521,7 @@ extension Binary.Machine {
                             }
                             let byte = advanceProvenInBounds(&input)
                             done = try Binary.LEB128.Decode.unsigned(
-                                byte: byte.underlying,
+                                byte: byte.bitPattern,
                                 into: &result,
                                 shift: &shift
                             )
@@ -541,7 +543,7 @@ extension Binary.Machine {
                             }
                             let byte = advanceProvenInBounds(&input)
                             done = try Binary.LEB128.Decode.signed(
-                                byte: byte.underlying,
+                                byte: byte.bitPattern,
                                 into: &result,
                                 shift: &shift
                             )

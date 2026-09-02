@@ -1,6 +1,6 @@
-public import Buffer_Linear_Primitive
-public import Buffer_Linear
-public import Ownership_Shared_Primitive
+public import Cardinal
+public import Index
+public import Ordinal_Protocol
 public import Parser
 
 extension Binary.Parse.Access {
@@ -18,7 +18,7 @@ extension Binary.Parse.Access {
             throw .left(error)
         }
         guard input.isEmpty else {
-            throw .right(.end(remaining: input.count))
+            throw .right(.end(remaining: Index<Byte>.Count(Cardinal(UInt(input.count)))))
         }
         return value
     }

@@ -1,6 +1,8 @@
+public import Binary_Endianness
+
 extension Binary.Parse {
 
-    public struct Inline<let Count: Int, Element: FixedWidthInteger>: Sendable {
+    public struct Inline<let Count: Int, Element: FixedWidthInteger> {
 
         public let endianness: Binary.Endianness
 

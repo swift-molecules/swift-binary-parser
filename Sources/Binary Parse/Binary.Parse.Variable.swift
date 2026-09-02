@@ -1,6 +1,8 @@
+public import Binary_Endianness
+
 extension Binary.Parse {
 
-    public struct Variable<T: FixedWidthInteger>: Sendable {
+    public struct Variable<T: FixedWidthInteger> {
 
         public let count: Int
 
@@ -39,12 +41,13 @@ extension Binary.Parse.Variable: Parser.`Protocol` {
         case .little:
 
             (0..<count).forEach { i in
-                result |= T(truncatingIfNeeded: input[base + i].underlying) << (i * 8)
+                let term = T(truncatingIfNeeded: input[base + i].bitPattern) << (i * 8)
+                result |= term
             }
 
             if T.isSigned {
 
-                let signBit = (input[base + count - 1] & 0x80) != 0
+                let signBit = (input[base + count - 1].bitPattern & 0x80) != 0
                 if signBit {
 
                     let shift = count * 8
@@ -58,11 +61,12 @@ extension Binary.Parse.Variable: Parser.`Protocol` {
 
             (0..<count).forEach { i in
 
-                result |= T(truncatingIfNeeded: input[base + i].underlying) << ((count - 1 - i) * 8)
+                let term = T(truncatingIfNeeded: input[base + i].bitPattern) << ((count - 1 - i) * 8)
+                result |= term
             }
 
             if T.isSigned {
-                let signBit = (input[base] & 0x80) != 0
+                let signBit = (input[base].bitPattern & 0x80) != 0
                 if signBit {
 
                     let shift = count * 8

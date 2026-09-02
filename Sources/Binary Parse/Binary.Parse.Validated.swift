@@ -1,6 +1,8 @@
+public import Binary_Endianness
+
 extension Binary.Parse {
 
-    public struct Validated<T>: Sendable
+    public struct Validated<T>
     where T: RawRepresentable, T.RawValue: FixedWidthInteger {
 
         public let endianness: Binary.Endianness
@@ -45,14 +47,16 @@ extension Binary.Parse.Validated: Parser.`Protocol` {
         switch endianness {
         case .little:
             (0..<rawSize).forEach { i in
-                rawValue |= T.RawValue(truncatingIfNeeded: input[base + i].underlying) << (i * 8)
+                let term = T.RawValue(truncatingIfNeeded: input[base + i].bitPattern) << (i * 8)
+                rawValue |= term
             }
 
         case .big:
             (0..<rawSize).forEach { i in
-                rawValue |=
-                    T.RawValue(truncatingIfNeeded: input[base + i].underlying)
+                let term =
+                    T.RawValue(truncatingIfNeeded: input[base + i].bitPattern)
                     << ((rawSize - 1 - i) * 8)
+                rawValue |= term
             }
         }
 

@@ -1,7 +1,8 @@
 public import Byte
 public import Index
-import Machine
-import Parser
+public import Machine
+public import Ordinal_Protocol
+public import Parser
 
 extension Binary.Machine {
 
@@ -41,10 +42,10 @@ extension Binary.Machine.Fault {
             )
 
         case .unexpectedByte(let expected, let found):
-            let foundStr = found.map { "0x\(String($0.underlying, radix: 16))" } ?? "EOF"
+            let foundStr = found.map { "0x\(String($0.bitPattern, radix: 16))" } ?? "EOF"
             return .unexpected(
                 expected:
-                    "byte 0x\(String(expected.underlying, radix: 16)) for \(typeName), found \(foundStr)"
+                    "byte 0x\(String(expected.bitPattern, radix: 16)) for \(typeName), found \(foundStr)"
             )
 
         case .unexpectedBytes(let expected, _):
@@ -58,7 +59,7 @@ extension Binary.Machine.Fault {
         case .predicateFailed(let byte):
             return .unexpected(
                 expected:
-                    "byte satisfying predicate for \(typeName), got 0x\(String(byte.underlying, radix: 16))"
+                    "byte satisfying predicate for \(typeName), got 0x\(String(byte.bitPattern, radix: 16))"
             )
 
         case .depthExceeded(let limit):

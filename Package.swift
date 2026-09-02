@@ -47,12 +47,12 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-molecules/swift-parser.git",
+            url: "https://github.com/swift-atoms/swift-parser.git",
             branch: "main"
         ),
 
         .package(
-            url: "https://github.com/swift-molecules/swift-binary.git",
+            url: "https://github.com/swift-atoms/swift-binary.git",
             branch: "main"
         ),
         .package(
@@ -64,15 +64,23 @@ let package = Package(
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-vector.git",
+            url: "https://github.com/swift-atoms/swift-vector.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-index.git",
+            url: "https://github.com/swift-atoms/swift-index.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-byte.git",
+            url: "https://github.com/swift-atoms/swift-byte.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-atoms/swift-cardinal.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-atoms/swift-ordinal.git",
             branch: "main"
         ),
 
@@ -81,7 +89,7 @@ let package = Package(
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-span.git",
+            url: "https://github.com/swift-atoms/swift-span.git",
             branch: "main"
         ),
         .package(
@@ -133,6 +141,8 @@ let package = Package(
                     name: "Ownership Shared Primitive",
                     package: "swift-ownership-shared"
                 ),
+                .product(name: "Cardinal", package: "swift-cardinal"),
+                .product(name: "Ordinal Protocol", package: "swift-ordinal"),
             ]
         ),
         .target(
@@ -151,6 +161,8 @@ let package = Package(
                 ),
 
                 .product(name: "Span Protocol", package: "swift-span"),
+                .product(name: "Cardinal", package: "swift-cardinal"),
+                .product(name: "Ordinal Protocol", package: "swift-ordinal"),
             ]
         ),
 
@@ -158,18 +170,10 @@ let package = Package(
             name: "Binary Parse",
             dependencies: [
                 "Binary Input",
-                .product(
-                    name: "Buffer Linear Primitive",
-                    package: "swift-buffer-linear"
-                ),
-                .product(
-                    name: "Buffer Linear",
-                    package: "swift-buffer-linear"
-                ),
-                .product(
-                    name: "Ownership Shared Primitive",
-                    package: "swift-ownership-shared"
-                ),
+                .product(name: "Index", package: "swift-index"),
+                .product(name: "Binary Endianness", package: "swift-binary"),
+                .product(name: "Cardinal", package: "swift-cardinal"),
+                .product(name: "Ordinal Protocol", package: "swift-ordinal"),
             ]
         ),
 
@@ -178,11 +182,18 @@ let package = Package(
             dependencies: [
                 "Binary Parse",
                 .product(name: "Binary", package: "swift-binary"),
+                .product(name: "Binary Endianness", package: "swift-binary"),
+                .product(
+                    name: "Binary Standard Library Integration",
+                    package: "swift-binary"
+                ),
                 .product(name: "Byte", package: "swift-byte"),
                 .product(
                     name: "Byte Standard Library Integration",
                     package: "swift-byte"
                 ),
+                .product(name: "Cardinal", package: "swift-cardinal"),
+                .product(name: "Ordinal Protocol", package: "swift-ordinal"),
             ]
         ),
 
@@ -195,6 +206,7 @@ let package = Package(
                     name: "Binary LEB128",
                     package: "swift-binary-leb128"
                 ),
+                .product(name: "Binary Endianness", package: "swift-binary"),
             ]
         ),
 
