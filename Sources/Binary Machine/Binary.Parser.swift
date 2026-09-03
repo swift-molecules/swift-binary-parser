@@ -1,17 +1,21 @@
 public import Buffer_Linear_Primitive
 public import Buffer_Linear
-public import Byte_Parser
+public import Byte
+public import Binary
+public import Byte_Standard_Library_Integration
+public import Cursor
+public import Cursor_Standard_Library_Integration
 public import Ownership_Shared_Primitive
 
 extension Binary {
 
     public struct Parser<Value> {
         @usableFromInline
-        let _parse: (inout Byte.Input) throws(Binary.Machine.Fault) -> Value
+        let _parse: (inout ArraySlice<Byte>) throws(Binary.Machine.Fault) -> Value
 
         @inlinable
         public init(
-            parse: @escaping (inout Byte.Input) throws(Binary.Machine.Fault) -> Value
+            parse: @escaping (inout ArraySlice<Byte>) throws(Binary.Machine.Fault) -> Value
         ) {
             self._parse = parse
         }
@@ -21,8 +25,8 @@ extension Binary {
 extension Binary.Parser {
 
     @inlinable
-    public func parseWhole(_ bytes: [Byte]) throws(Binary.Machine.Fault) -> Value {
-        var input = Byte.Input(bytes)
+    public func parseWhole(_ bytes: [Byte]) throws(Binary::Binary.Machine.Fault) -> Value {
+        var input = bytes[...]
         let value = try _parse(&input)
         let remaining = input.count
         guard remaining == .zero else {
@@ -32,7 +36,7 @@ extension Binary.Parser {
     }
 
     @inlinable
-    public func parsePrefix(_ input: inout Byte.Input) throws(Binary.Machine.Fault) -> Value {
+    public func parsePrefix(_ input: inout ArraySlice<Byte>) throws(Binary.Machine.Fault) -> Value {
         try _parse(&input)
     }
 }

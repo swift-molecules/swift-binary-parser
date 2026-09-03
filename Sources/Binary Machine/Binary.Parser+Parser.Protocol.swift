@@ -1,8 +1,11 @@
-public import Byte_Parser
+public import Byte
+public import Byte_Standard_Library_Integration
+public import Cursor
+public import Cursor_Standard_Library_Integration
 
 extension Binary.Parser: Parser.`Protocol` {
 
-    public typealias Input = Byte.Input
+    public typealias Input = ArraySlice<Byte>
 
     public typealias Output = Value
 
@@ -11,7 +14,7 @@ extension Binary.Parser: Parser.`Protocol` {
     public typealias Body = Never
 
     @inlinable
-    public borrowing func parse(_ input: inout Byte.Input) throws(Binary.Machine.Fault) -> Value {
+    public borrowing func parse(_ input: inout ArraySlice<Byte>) throws(Binary.Machine.Fault) -> Value {
         try _parse(&input)
     }
 }

@@ -662,27 +662,27 @@ extension Binary {
     @inlinable
     public static func withInput<T, E: Swift.Error>(
         _ bytes: [Byte],
-        _ body: (inout Byte.Input) throws(E) -> T
+        _ body: (inout ArraySlice<Byte>) throws(E) -> T
     ) throws(E) -> T {
-        var input = Byte.Input(bytes)
+        var input = bytes[...]
         return try body(&input)
     }
 
     @inlinable
     public static func withInput<Bytes, T, E: Swift.Error>(
         _ bytes: Bytes,
-        _ body: (inout Byte.Input) throws(E) -> T
+        _ body: (inout ArraySlice<Byte>) throws(E) -> T
     ) throws(E) -> T where Bytes: Swift.Collection, Bytes.Element == Byte {
-        var input = Byte.Input(Swift.Array(bytes))
+        var input = Array(bytes)[...]
         return try body(&input)
     }
 
     @inlinable
     public static func withInput<T, E: Swift.Error>(
         _ string: some StringProtocol,
-        _ body: (inout Byte.Input) throws(E) -> T
+        _ body: (inout ArraySlice<Byte>) throws(E) -> T
     ) throws(E) -> T {
-        var input = Byte.Input(Swift.Array(string.utf8))
+        var input = [Byte](utf8: String(string))[...]
         return try body(&input)
     }
 }

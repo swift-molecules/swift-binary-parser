@@ -9,7 +9,7 @@ Binary parsing molecules — the `Binary.Parseable` byte-stream deserialization 
 ## Key Features
 
 - **`Binary.Parseable` protocol** — streaming byte deserialization, the symmetric peer of `Binary.Serializable`. `parse(from:)` consumes a prefix from a `RangeReplaceableCollection` cursor, advancing the source on success and leaving it untouched on failure.
-- **`Binary.Parser<Value>` witness** — a closure-based plain witness conforming to the canonical ``Parser.`Protocol` `` with `Input = Byte.Input` and `Failure = Binary.Machine.Fault`.
+- **`Binary.Parser<Value>` witness** — a closure-based plain witness conforming to the canonical ``Parser.`Protocol` `` with `Input = ArraySlice<Byte>` and `Failure = Binary.Machine.Fault`.
 - **`Binary.Machine` engine** — a defunctionalized parser that represents programs as `Instruction` data so a `~Escapable` borrowed byte cursor never crosses a closure boundary.
 - **Parse-access ergonomics** — `parser.parse.whole(bytes)` requires every byte consumed; `parser.parse.prefix(bytes)` returns the value and the count of bytes consumed.
 - **Typed failures** — `Binary.Parse.Failure` (`insufficient` / `malformed` / `outOfRange`) for during-parse defects, and `Binary.Parse.Error` for the whole-buffer post-condition.
@@ -70,16 +70,15 @@ Requires Swift 6.3.1 and macOS 26 / iOS 26 / tvOS 26 / watchOS 26 / visionOS 26.
 
 ## Architecture
 
-Seven library products plus a test-support module. Each product maps to a same-named target.
+Six library products plus a test-support module. Each product maps to a same-named target.
 
 | Product | Purpose |
 |---------|---------|
-| `Binary Parser` | Umbrella. `@_exported` re-exports the Input, Machine, Borrowed, Parse, and Integer modules plus `Binary`, the `Byte Parser` substrate, `Parser`, and the `Binary.LEB128` namespace. |
+| `Binary Parser` | Umbrella. `@_exported` re-exports the Machine, Borrowed, Parse, and Integer modules plus `Binary`, `Byte`, the cursor conformances of the standard-library slices, `Parser`, and the `Binary.LEB128` namespace. |
 | `Binary Parseable` | The `Binary.Parseable` streaming-deserialization protocol, its `Binary.Parse.Failure` typed error, and stdlib / `Tagged` / `Array` conformances. Imported on its own — the umbrella does not re-export it. |
 | `Binary Parse` | The `Binary.Parse` namespace: `Binary.Parse.Access` ergonomics (`parse.whole` / `parse.prefix`), `Binary.Parse.Error`, and validation / conversion / variable-length helpers. |
 | `Binary Machine` | The `Binary.Parser<Value>` closure witness and the `Binary.Machine` defunctionalized engine (`Instruction`, `Program`, `Fault`, builders, combinators). |
 | `Binary Borrowed` | The borrowed-`Span` parse engine, extending the span protocol for `~Escapable` byte views. |
-| `Binary Input` | Re-export shim surfacing `Byte.Input` and the parser substrate for source compatibility. |
 | `Binary Integer` | Integer parsers — `Binary.Parse.Inline<Count, Element>` for fixed-size `InlineArray`, plus the re-exported `Binary.LEB128` variable-length namespace. |
 | `Binary Parser Test Support` | Re-exports the targets for test consumers. |
 

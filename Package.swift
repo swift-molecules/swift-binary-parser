@@ -21,10 +21,6 @@ let package = Package(
             targets: ["Binary Parseable"]
         ),
         .library(
-            name: "Binary Input",
-            targets: ["Binary Input"]
-        ),
-        .library(
             name: "Binary Machine",
             targets: ["Binary Machine"]
         ),
@@ -85,7 +81,15 @@ let package = Package(
         ),
 
         .package(
-            url: "https://github.com/swift-molecules/swift-byte-parser.git",
+            url: "https://github.com/swift-atoms/swift-either.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-atoms/swift-cursor.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-molecules/swift-iterator-parser.git",
             branch: "main"
         ),
         .package(
@@ -105,20 +109,13 @@ let package = Package(
     targets: [
 
         .target(
-            name: "Binary Input",
-            dependencies: [
-
-                .product(name: "Binary", package: "swift-binary"),
-                .product(name: "Parser", package: "swift-parser"),
-                .product(name: "Byte Parser", package: "swift-byte-parser"),
-            ]
-        ),
-
-        .target(
             name: "Binary Machine",
             dependencies: [
-                "Binary Input",
-                .product(name: "Byte Parser", package: "swift-byte-parser"),
+                .product(name: "Byte", package: "swift-byte"),
+                .product(name: "Byte Standard Library Integration", package: "swift-byte"),
+                .product(name: "Cursor", package: "swift-cursor"),
+                .product(name: "Cursor Standard Library Integration", package: "swift-cursor"),
+                .product(name: "Iterator Parser", package: "swift-iterator-parser"),
                 .product(name: "Machine", package: "swift-machine"),
                 .product(name: "Vector", package: "swift-vector"),
                 .product(
@@ -149,7 +146,11 @@ let package = Package(
             name: "Binary Borrowed",
             dependencies: [
                 "Binary Machine",
-                .product(name: "Byte Parser", package: "swift-byte-parser"),
+                .product(name: "Byte", package: "swift-byte"),
+                .product(name: "Byte Standard Library Integration", package: "swift-byte"),
+                .product(name: "Cursor", package: "swift-cursor"),
+                .product(name: "Cursor Standard Library Integration", package: "swift-cursor"),
+                .product(name: "Iterator Parser", package: "swift-iterator-parser"),
                 .product(name: "Vector", package: "swift-vector"),
                 .product(
                     name: "Byte Standard Library Integration",
@@ -169,7 +170,14 @@ let package = Package(
         .target(
             name: "Binary Parse",
             dependencies: [
-                "Binary Input",
+                .product(name: "Binary", package: "swift-binary"),
+                .product(name: "Either", package: "swift-either"),
+                .product(name: "Parser", package: "swift-parser"),
+                .product(name: "Byte", package: "swift-byte"),
+                .product(name: "Byte Standard Library Integration", package: "swift-byte"),
+                .product(name: "Cursor", package: "swift-cursor"),
+                .product(name: "Cursor Standard Library Integration", package: "swift-cursor"),
+                .product(name: "Iterator Parser", package: "swift-iterator-parser"),
                 .product(name: "Index", package: "swift-index"),
                 .product(name: "Binary Endianness", package: "swift-binary"),
                 .product(name: "Cardinal", package: "swift-cardinal"),
@@ -214,7 +222,6 @@ let package = Package(
             name: "Binary Parser",
             dependencies: [
 
-                "Binary Input",
                 "Binary Machine",
                 "Binary Borrowed",
                 "Binary Parse",
@@ -239,10 +246,6 @@ let package = Package(
                 .product(name: "Index Test Support", package: "swift-index"),
             ],
             path: "Tests/Support"
-        ),
-        .testTarget(
-            name: "Binary Input Tests",
-            dependencies: ["Binary Parser Test Support"]
         ),
         .testTarget(
             name: "Binary Borrowed Tests",

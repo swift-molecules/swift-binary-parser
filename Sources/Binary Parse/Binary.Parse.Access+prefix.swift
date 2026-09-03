@@ -10,9 +10,9 @@ extension Binary.Parse.Access {
         _ bytes: Bytes
     ) throws(P.Failure) -> (value: P.Output, count: Index<Byte>.Count)
     where Bytes.Element == Byte {
-        var input = Byte.Input(bytes)
+        var input = Swift.Array(bytes)[...]
         let value = try parser.parse(&input)
-        let consumed = Index<Byte>.Count(Cardinal(UInt(input.checkpoint)))
+        let consumed = Index<Byte>.Count(Cardinal(UInt(input.startIndex)))
         return (value: value, count: consumed)
     }
 }

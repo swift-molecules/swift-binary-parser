@@ -10,7 +10,7 @@ extension Binary.Parse.Access {
         _ bytes: Bytes
     ) throws(Either<P.Failure, Binary.Parse.Error>) -> P.Output
     where Bytes.Element == Byte {
-        var input = Byte.Input(bytes)
+        var input = Swift.Array(bytes)[...]
         let value: P.Output
         do throws(P.Failure) {
             value = try parser.parse(&input)

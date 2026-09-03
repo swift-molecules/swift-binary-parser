@@ -3,6 +3,7 @@ public import Index
 public import Machine
 public import Ordinal_Protocol
 public import Parser
+public import Iterator_Parser
 
 extension Binary.Machine {
 

@@ -159,30 +159,30 @@ extension Binary.Test.`Edge Case` {
 extension Binary.Test.Unit {
 
     @Test
-    func `Binary.withInput from byte array constructs Byte.Input`() {
-        var observedCount: Index<Byte>.Count = .zero
-        Binary.withInput([0x01, 0x02, 0x03] as [Byte]) { (input: inout Byte.Input) in
+    func `Binary.withInput from byte array hands the body a byte slice`() {
+        var observedCount = 0
+        Binary.withInput([0x01, 0x02, 0x03] as [Byte]) { (input: inout ArraySlice<Byte>) in
             observedCount = input.count
         }
-        #expect(observedCount == Index<Byte>.Count(Cardinal(3)))
+        #expect(observedCount == 3)
     }
 
     @Test
-    func `Binary.withInput from ArraySlice constructs Byte.Input`() {
+    func `Binary.withInput from ArraySlice hands the body a byte slice`() {
         let bytes: [Byte] = [0x01, 0x02, 0x03, 0x04, 0x05]
-        var observedCount: Index<Byte>.Count = .zero
-        Binary.withInput(bytes[1..<4]) { (input: inout Byte.Input) in
+        var observedCount = 0
+        Binary.withInput(bytes[1..<4]) { (input: inout ArraySlice<Byte>) in
             observedCount = input.count
         }
-        #expect(observedCount == Index<Byte>.Count(Cardinal(3)))
+        #expect(observedCount == 3)
     }
 
     @Test
     func `Binary.withInput from string produces input with correct UTF-8 count`() {
-        var observedCount: Index<Byte>.Count = .zero
-        Binary.withInput("ABC") { (input: inout Byte.Input) in
+        var observedCount = 0
+        Binary.withInput("ABC") { (input: inout ArraySlice<Byte>) in
             observedCount = input.count
         }
-        #expect(observedCount == Index<Byte>.Count(Cardinal(3)))
+        #expect(observedCount == 3)
     }
 }
