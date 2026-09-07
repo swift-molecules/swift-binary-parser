@@ -6,7 +6,7 @@ public import Cursor
 internal import Index
 public import Machine
 public import Ordinal_Protocol
-public import Span_Protocol
+public import Span
 public import Standard_Library_Extensions
 public import Vector
 

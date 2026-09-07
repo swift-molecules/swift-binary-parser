@@ -1,4 +1,4 @@
-public import Binary_Endianness
+public import Binary
 
 extension Binary.Parse {
 

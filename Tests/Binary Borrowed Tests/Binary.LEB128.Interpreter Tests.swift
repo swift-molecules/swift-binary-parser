@@ -1,6 +1,6 @@
 import Binary_Parser_Test_Support
 import Byte
-import Span_Protocol
+import Span
 import Testing
 
 @testable import Binary_Parser

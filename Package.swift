@@ -119,10 +119,6 @@ let package = Package(
                 .product(name: "Machine", package: "swift-machine"),
                 .product(name: "Vector", package: "swift-vector"),
                 .product(
-                    name: "Byte Standard Library Integration",
-                    package: "swift-byte"
-                ),
-                .product(
                     name: "Binary LEB128 Decode",
                     package: "swift-binary-leb128"
                 ),
@@ -153,15 +149,11 @@ let package = Package(
                 .product(name: "Iterator Parser", package: "swift-iterator-parser"),
                 .product(name: "Vector", package: "swift-vector"),
                 .product(
-                    name: "Byte Standard Library Integration",
-                    package: "swift-byte"
-                ),
-                .product(
                     name: "Binary LEB128 Decode",
                     package: "swift-binary-leb128"
                 ),
 
-                .product(name: "Span Protocol", package: "swift-span"),
+                .product(name: "Span", package: "swift-span"),
                 .product(name: "Cardinal", package: "swift-cardinal"),
                 .product(name: "Ordinal Protocol", package: "swift-ordinal"),
             ]
@@ -179,7 +171,6 @@ let package = Package(
                 .product(name: "Cursor Standard Library Integration", package: "swift-cursor"),
                 .product(name: "Iterator Parser", package: "swift-iterator-parser"),
                 .product(name: "Index", package: "swift-index"),
-                .product(name: "Binary Endianness", package: "swift-binary"),
                 .product(name: "Cardinal", package: "swift-cardinal"),
                 .product(name: "Ordinal Protocol", package: "swift-ordinal"),
             ]
@@ -190,7 +181,6 @@ let package = Package(
             dependencies: [
                 "Binary Parse",
                 .product(name: "Binary", package: "swift-binary"),
-                .product(name: "Binary Endianness", package: "swift-binary"),
                 .product(
                     name: "Binary Standard Library Integration",
                     package: "swift-binary"
@@ -214,7 +204,7 @@ let package = Package(
                     name: "Binary LEB128",
                     package: "swift-binary-leb128"
                 ),
-                .product(name: "Binary Endianness", package: "swift-binary"),
+                .product(name: "Binary", package: "swift-binary"),
             ]
         ),
 

@@ -1,4 +1,4 @@
-public import Binary_Endianness
+public import Binary
 public import Binary_Standard_Library_Integration
 public import Byte
 
