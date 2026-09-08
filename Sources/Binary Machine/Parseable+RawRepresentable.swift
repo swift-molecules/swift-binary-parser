@@ -1,9 +1,9 @@
 public import Byte
-public import Byte_Standard_Library_Integration
+public import Byte
 public import Cursor
-public import Cursor_Standard_Library_Integration
+public import Cursor
 public import Cardinal
-public import Ordinal_Protocol
+public import Ordinal
 
 extension Parseable where Self: RawRepresentable, Self.RawValue: FixedWidthInteger {
 

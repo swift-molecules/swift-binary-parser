@@ -1,11 +1,11 @@
 public import Binary_LEB128_Decode
 public import Byte
-public import Byte_Standard_Library_Integration
+public import Byte
 public import Cardinal
 public import Cursor
 internal import Index
 public import Machine
-public import Ordinal_Protocol
+public import Ordinal
 public import Span
 public import Standard_Library_Extensions
 public import Vector

@@ -2,9 +2,9 @@ public import Buffer_Linear_Primitive
 public import Buffer_Linear
 public import Byte
 public import Binary
-public import Byte_Standard_Library_Integration
+public import Byte
 public import Cursor
-public import Cursor_Standard_Library_Integration
+public import Cursor
 public import Ownership_Shared_Primitive
 
 extension Binary {

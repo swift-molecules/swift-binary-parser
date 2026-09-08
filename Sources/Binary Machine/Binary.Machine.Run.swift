@@ -1,10 +1,10 @@
 internal import Binary_LEB128_Decode
 public import Byte
-public import Byte_Standard_Library_Integration
+public import Byte
 public import Cardinal
 internal import Index
 public import Machine
-public import Ordinal_Protocol
+public import Ordinal
 public import Parser
 
 @inline(__always)

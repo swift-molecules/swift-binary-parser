@@ -1,6 +1,6 @@
 public import Cardinal
 public import Index
-public import Ordinal_Protocol
+public import Ordinal
 public import Parser
 
 extension Binary.Parse.Access {

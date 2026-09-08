@@ -1,7 +1,7 @@
 public import Byte
 public import Index
 public import Machine
-public import Ordinal_Protocol
+public import Ordinal
 public import Parser
 public import Iterator_Parser
 

@@ -1,6 +1,6 @@
 public import Byte
 public import Index
-public import Ordinal_Protocol
+public import Ordinal
 
 extension Binary.Parse {
 

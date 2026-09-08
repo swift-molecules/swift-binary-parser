@@ -1,7 +1,7 @@
 public import Byte
-public import Byte_Standard_Library_Integration
+public import Byte
 public import Cursor
-public import Cursor_Standard_Library_Integration
+public import Cursor
 
 extension Binary.Parser: Parser.`Protocol` {
 

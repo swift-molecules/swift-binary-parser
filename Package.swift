@@ -112,9 +112,9 @@ let package = Package(
             name: "Binary Machine",
             dependencies: [
                 .product(name: "Byte", package: "swift-byte"),
-                .product(name: "Byte Standard Library Integration", package: "swift-byte"),
+                .product(name: "Byte", package: "swift-byte"),
                 .product(name: "Cursor", package: "swift-cursor"),
-                .product(name: "Cursor Standard Library Integration", package: "swift-cursor"),
+                .product(name: "Cursor", package: "swift-cursor"),
                 .product(name: "Iterator Parser", package: "swift-iterator-parser"),
                 .product(name: "Machine", package: "swift-machine"),
                 .product(name: "Vector", package: "swift-vector"),
@@ -135,7 +135,7 @@ let package = Package(
                     package: "swift-ownership-shared"
                 ),
                 .product(name: "Cardinal", package: "swift-cardinal"),
-                .product(name: "Ordinal Protocol", package: "swift-ordinal"),
+                .product(name: "Ordinal", package: "swift-ordinal"),
             ]
         ),
         .target(
@@ -143,9 +143,9 @@ let package = Package(
             dependencies: [
                 "Binary Machine",
                 .product(name: "Byte", package: "swift-byte"),
-                .product(name: "Byte Standard Library Integration", package: "swift-byte"),
+                .product(name: "Byte", package: "swift-byte"),
                 .product(name: "Cursor", package: "swift-cursor"),
-                .product(name: "Cursor Standard Library Integration", package: "swift-cursor"),
+                .product(name: "Cursor", package: "swift-cursor"),
                 .product(name: "Iterator Parser", package: "swift-iterator-parser"),
                 .product(name: "Vector", package: "swift-vector"),
                 .product(
@@ -155,7 +155,7 @@ let package = Package(
 
                 .product(name: "Span", package: "swift-span"),
                 .product(name: "Cardinal", package: "swift-cardinal"),
-                .product(name: "Ordinal Protocol", package: "swift-ordinal"),
+                .product(name: "Ordinal", package: "swift-ordinal"),
             ]
         ),
 
@@ -166,13 +166,13 @@ let package = Package(
                 .product(name: "Either", package: "swift-either"),
                 .product(name: "Parser", package: "swift-parser"),
                 .product(name: "Byte", package: "swift-byte"),
-                .product(name: "Byte Standard Library Integration", package: "swift-byte"),
+                .product(name: "Byte", package: "swift-byte"),
                 .product(name: "Cursor", package: "swift-cursor"),
-                .product(name: "Cursor Standard Library Integration", package: "swift-cursor"),
+                .product(name: "Cursor", package: "swift-cursor"),
                 .product(name: "Iterator Parser", package: "swift-iterator-parser"),
                 .product(name: "Index", package: "swift-index"),
                 .product(name: "Cardinal", package: "swift-cardinal"),
-                .product(name: "Ordinal Protocol", package: "swift-ordinal"),
+                .product(name: "Ordinal", package: "swift-ordinal"),
             ]
         ),
 
@@ -182,16 +182,16 @@ let package = Package(
                 "Binary Parse",
                 .product(name: "Binary", package: "swift-binary"),
                 .product(
-                    name: "Binary Standard Library Integration",
+                    name: "Binary",
                     package: "swift-binary"
                 ),
                 .product(name: "Byte", package: "swift-byte"),
                 .product(
-                    name: "Byte Standard Library Integration",
+                    name: "Byte",
                     package: "swift-byte"
                 ),
                 .product(name: "Cardinal", package: "swift-cardinal"),
-                .product(name: "Ordinal Protocol", package: "swift-ordinal"),
+                .product(name: "Ordinal", package: "swift-ordinal"),
             ]
         ),
 
@@ -230,7 +230,7 @@ let package = Package(
                     package: "swift-binary"
                 ),
                 .product(
-                    name: "Byte Standard Library Integration",
+                    name: "Byte",
                     package: "swift-byte"
                 ),
                 .product(name: "Index Test Support", package: "swift-index"),
