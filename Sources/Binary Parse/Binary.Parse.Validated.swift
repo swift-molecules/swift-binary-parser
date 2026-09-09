@@ -26,7 +26,7 @@ extension Binary.Parse.Validated {
 
 extension Binary.Parse.Validated.Error: Sendable where T.RawValue: Sendable {}
 
-extension Binary.Parse.Validated: Parser.`Protocol` {
+extension Binary.Parse.Validated: Parsing {
 
     public typealias Input = ArraySlice<Byte>
 

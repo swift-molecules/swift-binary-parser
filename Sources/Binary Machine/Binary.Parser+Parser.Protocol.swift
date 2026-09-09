@@ -3,7 +3,7 @@ public import Byte
 public import Cursor
 public import Cursor
 
-extension Binary.Parser: Parser.`Protocol` {
+extension Binary.Parser: Parsing {
 
     public typealias Input = ArraySlice<Byte>
 

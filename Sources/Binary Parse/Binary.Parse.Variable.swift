@@ -20,7 +20,7 @@ extension Binary.Parse {
     }
 }
 
-extension Binary.Parse.Variable: Parser.`Protocol` {
+extension Binary.Parse.Variable: Parsing {
 
     public typealias Input = ArraySlice<Byte>
 

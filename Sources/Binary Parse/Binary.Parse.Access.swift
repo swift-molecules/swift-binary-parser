@@ -2,7 +2,7 @@ public import Parser
 
 extension Binary.Parse {
 
-    public struct Access<P: Parser.`Protocol`>
+    public struct Access<P: Parsing>
     where P.Input == ArraySlice<Byte>, P.Output: Copyable & Escapable {
         @usableFromInline
         internal let parser: P

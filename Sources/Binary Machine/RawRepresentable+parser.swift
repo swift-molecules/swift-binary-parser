@@ -5,7 +5,7 @@ public import Cursor
 public import Cardinal
 public import Ordinal
 
-extension Parseable where Self: RawRepresentable, Self.RawValue: FixedWidthInteger {
+extension RawRepresentable where RawValue: FixedWidthInteger {
 
     public static var parser: Binary.Parser<Self> {
         Binary.Parser { input throws(Binary.Machine.Fault) in

@@ -26,7 +26,7 @@ extension Binary.Parse.Converting {
 
 extension Binary.Parse.Converting.Error: Sendable where Source: Sendable {}
 
-extension Binary.Parse.Converting: Parser.`Protocol` {
+extension Binary.Parse.Converting: Parsing {
 
     public typealias Input = ArraySlice<Byte>
 

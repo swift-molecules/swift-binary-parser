@@ -12,6 +12,7 @@ let package = Package(
         .visionOS(.v27),
     ],
     products: [
+        .library(name: "ASCII Decimal Machine", targets: ["ASCII Decimal Machine"]),
         .library(
             name: "Binary Parser",
             targets: ["Binary Parser"]
@@ -42,6 +43,7 @@ let package = Package(
         ),
     ],
     dependencies: [
+        .package(url: "https://github.com/swift-atoms/swift-ascii.git", branch: "main"),
         .package(
             url: "https://github.com/swift-atoms/swift-parser.git",
             branch: "main"
@@ -107,11 +109,22 @@ let package = Package(
         ),
     ],
     targets: [
+        .target(
+            name: "ASCII Decimal Machine",
+            dependencies: [
+                "Binary Machine",
+                .product(name: "ASCII", package: "swift-ascii"),
+                .product(name: "Byte", package: "swift-byte"),
+            ]
+        ),
+        .testTarget(
+            name: "ASCII Decimal Machine Tests",
+            dependencies: ["ASCII Decimal Machine"]
+        ),
 
         .target(
             name: "Binary Machine",
             dependencies: [
-                .product(name: "Byte", package: "swift-byte"),
                 .product(name: "Byte", package: "swift-byte"),
                 .product(name: "Cursor", package: "swift-cursor"),
                 .product(name: "Cursor", package: "swift-cursor"),
@@ -143,7 +156,6 @@ let package = Package(
             dependencies: [
                 "Binary Machine",
                 .product(name: "Byte", package: "swift-byte"),
-                .product(name: "Byte", package: "swift-byte"),
                 .product(name: "Cursor", package: "swift-cursor"),
                 .product(name: "Cursor", package: "swift-cursor"),
                 .product(name: "Iterator Parser", package: "swift-iterator-parser"),
@@ -165,7 +177,6 @@ let package = Package(
                 .product(name: "Binary", package: "swift-binary"),
                 .product(name: "Either", package: "swift-either"),
                 .product(name: "Parser", package: "swift-parser"),
-                .product(name: "Byte", package: "swift-byte"),
                 .product(name: "Byte", package: "swift-byte"),
                 .product(name: "Cursor", package: "swift-cursor"),
                 .product(name: "Cursor", package: "swift-cursor"),
