@@ -2,9 +2,7 @@ internal import ASCII
 internal import Binary_Machine
 
 extension ASCII.Decimal.Machine {
-    /// The suffix after the required first digit. A separately tracked power
-    /// overflow matters only when that first digit is nonzero: arbitrarily many
-    /// leading zeroes must not make a representable value fail.
+
     struct Fold<U: FixedWidthInteger & UnsignedInteger> {
         var multiplier: U = 1
         var sum: U = 0

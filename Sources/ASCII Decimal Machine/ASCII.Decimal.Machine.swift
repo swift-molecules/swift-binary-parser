@@ -56,8 +56,7 @@ extension ASCII.Decimal.Machine {
         let number = Binary.Machine.sequence(
             digit, suffix, combine: { ($0, $1) }, in: &builder
         )
-        // The fold has finished before overflow becomes a parser failure. Raising
-        // overflow inside its child would let repetition recover as a short match.
+
         return number.tryMap(
             { pair throws(Binary.Machine.Fault) -> U in
                 try pair.1.value(prepending: pair.0)
