@@ -46,7 +46,7 @@ let package = Package(
         .package(url: "https://github.com/swift-atoms/swift-ascii.git", branch: "main"),
         .package(
             url: "https://github.com/swift-atoms/swift-parser.git",
-            branch: "main", traits: ["IteratorLeaves"]),
+            branch: "main", traits: ["IteratorLeaves", "Either", "Iterator"]),
 
         .package(
             url: "https://github.com/swift-atoms/swift-binary.git",
