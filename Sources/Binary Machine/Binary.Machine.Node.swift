@@ -3,5 +3,5 @@ import Tagged
 
 extension Binary.Machine {
 
-    public typealias Node = Machine.Machine.Node<Instruction, Fault, Mode>
+    public typealias Node = Machine::Machine.Node<Instruction, Fault, Mode>
 }

@@ -3,15 +3,15 @@ public import Vector
 
 extension Binary.Machine {
 
-    public typealias Mode = Machine.Machine.Capture.Mode.Unchecked
+    public typealias Mode = Machine::Machine.Capture.Mode.Unchecked
 
     public struct Builder: ~Copyable {
         @usableFromInline
-        var inner: Machine.Machine.Builder<Instruction, Fault, Mode>
+        var inner: Machine::Machine.Builder<Instruction, Fault, Mode>
 
         @usableFromInline
         init(maxDepth: Int? = nil) {
-            self.inner = Machine.Machine.Builder(maxDepth: maxDepth)
+            self.inner = Machine::Machine.Builder(maxDepth: maxDepth)
         }
     }
 
@@ -43,7 +43,7 @@ extension Binary.Machine.Builder {
     }
 
     @usableFromInline
-    var captures: Machine.Machine.Capture.Store<Binary.Machine.Mode> {
+    var captures: Machine::Machine.Capture.Store<Binary.Machine.Mode> {
         get { inner.captures }
         _modify { yield &inner.captures }
     }

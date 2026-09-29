@@ -7,7 +7,7 @@ extension Binary.Machine {
 
     public typealias Checkpoint = ArraySlice<Byte>.Checkpoint
 
-    public typealias Frame<Position> = Machine.Machine.Frame<
+    public typealias Frame<Position> = Machine::Machine.Frame<
         Node.ID, Position, Mode, Fault, Never
     >
 }
