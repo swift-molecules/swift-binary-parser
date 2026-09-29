@@ -6,7 +6,7 @@ extension InlineArray where Element: FixedWidthInteger {
     public init(
         parsing input: inout ArraySlice<Byte>,
         endianness: Binary.Endianness
-    ) throws(Parser.EndOfInput.Error) {
+    ) throws(Parser::EndOfInput.Error) {
         self = Self(repeating: 0)
         let elementSize = MemoryLayout<Element>.size
 

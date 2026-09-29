@@ -2,8 +2,6 @@ public import Buffer_Linear_Primitive
 public import Buffer_Linear
 public import Byte
 public import Binary
-public import Byte
-public import Cursor
 public import Cursor
 public import Ownership_Shared_Primitive
 

@@ -26,7 +26,7 @@ extension Binary.Parse.Variable: Parsing {
 
     public typealias Output = T
 
-    public typealias Failure = Parser.EndOfInput.Error
+    public typealias Failure = Parser::EndOfInput.Error
 
     @inlinable
     public func parse(_ input: inout Input) throws(Failure) -> T {

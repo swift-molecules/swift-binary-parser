@@ -19,7 +19,7 @@ extension Binary.Parse.Inline: Parsing {
 
     public typealias Output = InlineArray<Count, Element>
 
-    public typealias Failure = Parser.EndOfInput.Error
+    public typealias Failure = Parser::EndOfInput.Error
 
     @inlinable
     public func parse(_ input: inout Input) throws(Failure) -> Output {

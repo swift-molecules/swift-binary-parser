@@ -46,17 +46,11 @@ let package = Package(
         .package(url: "https://github.com/swift-atoms/swift-ascii.git", branch: "main"),
         .package(
             url: "https://github.com/swift-atoms/swift-parser.git",
-            branch: "main"
-        ),
+            branch: "main", traits: ["IteratorLeaves"]),
 
         .package(
             url: "https://github.com/swift-atoms/swift-binary.git",
-            branch: "main"
-        ),
-        .package(
-            url: "https://github.com/swift-molecules/swift-binary-leb128.git",
-            branch: "main"
-        ),
+            branch: "main", traits: ["LEB128"]),
         .package(
             url: "https://github.com/swift-molecules/swift-machine.git",
             branch: "main"
@@ -91,10 +85,6 @@ let package = Package(
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-iterator-parser.git",
-            branch: "main"
-        ),
-        .package(
             url: "https://github.com/swift-atoms/swift-span.git",
             branch: "main"
         ),
@@ -107,6 +97,7 @@ let package = Package(
             url: "https://github.com/swift-molecules/swift-ownership-shared.git",
             branch: "main"
         ),
+        .package(url: "https://github.com/swift-atoms/swift-checkpoint.git", branch: "main"),
     ],
     targets: [
         .target(
@@ -128,13 +119,8 @@ let package = Package(
                 .product(name: "Byte", package: "swift-byte"),
                 .product(name: "Cursor", package: "swift-cursor"),
                 .product(name: "Cursor", package: "swift-cursor"),
-                .product(name: "Iterator Parser", package: "swift-iterator-parser"),
                 .product(name: "Machine", package: "swift-machine"),
                 .product(name: "Vector", package: "swift-vector"),
-                .product(
-                    name: "Binary LEB128 Decode",
-                    package: "swift-binary-leb128"
-                ),
                 .product(
                     name: "Buffer Linear Primitive",
                     package: "swift-buffer-linear"
@@ -149,6 +135,9 @@ let package = Package(
                 ),
                 .product(name: "Cardinal", package: "swift-cardinal"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
+                .product(name: "Binary", package: "swift-binary"),
+                .product(name: "Parser", package: "swift-parser"),
+                .product(name: "Checkpoint", package: "swift-checkpoint"),
             ]
         ),
         .target(
@@ -158,16 +147,14 @@ let package = Package(
                 .product(name: "Byte", package: "swift-byte"),
                 .product(name: "Cursor", package: "swift-cursor"),
                 .product(name: "Cursor", package: "swift-cursor"),
-                .product(name: "Iterator Parser", package: "swift-iterator-parser"),
                 .product(name: "Vector", package: "swift-vector"),
-                .product(
-                    name: "Binary LEB128 Decode",
-                    package: "swift-binary-leb128"
-                ),
 
                 .product(name: "Span", package: "swift-span"),
                 .product(name: "Cardinal", package: "swift-cardinal"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
+                .product(name: "Binary", package: "swift-binary"),
+                .product(name: "Parser", package: "swift-parser"),
+                .product(name: "Checkpoint", package: "swift-checkpoint"),
             ]
         ),
 
@@ -180,10 +167,10 @@ let package = Package(
                 .product(name: "Byte", package: "swift-byte"),
                 .product(name: "Cursor", package: "swift-cursor"),
                 .product(name: "Cursor", package: "swift-cursor"),
-                .product(name: "Iterator Parser", package: "swift-iterator-parser"),
                 .product(name: "Index", package: "swift-index"),
                 .product(name: "Cardinal", package: "swift-cardinal"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
+                .product(name: "Checkpoint", package: "swift-checkpoint"),
             ]
         ),
 
@@ -203,6 +190,9 @@ let package = Package(
                 ),
                 .product(name: "Cardinal", package: "swift-cardinal"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
+                .product(name: "Parser", package: "swift-parser"),
+                .product(name: "Cursor", package: "swift-cursor"),
+                .product(name: "Checkpoint", package: "swift-checkpoint"),
             ]
         ),
 
@@ -210,12 +200,10 @@ let package = Package(
             name: "Binary Integer",
             dependencies: [
                 "Binary Parse",
-
-                .product(
-                    name: "Binary LEB128",
-                    package: "swift-binary-leb128"
-                ),
                 .product(name: "Binary", package: "swift-binary"),
+                .product(name: "Parser", package: "swift-parser"),
+                .product(name: "Cursor", package: "swift-cursor"),
+                .product(name: "Checkpoint", package: "swift-checkpoint"),
             ]
         ),
 
@@ -228,6 +216,10 @@ let package = Package(
                 "Binary Parse",
                 "Binary Parseable",
                 "Binary Integer",
+                .product(name: "Binary", package: "swift-binary"),
+                .product(name: "Parser", package: "swift-parser"),
+                .product(name: "Cursor", package: "swift-cursor"),
+                .product(name: "Checkpoint", package: "swift-checkpoint"),
             ]
         ),
 

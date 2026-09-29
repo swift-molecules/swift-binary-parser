@@ -3,7 +3,6 @@ public import Index
 public import Machine
 public import Ordinal
 public import Parser
-public import Iterator_Parser
 
 extension Binary.Machine {
 
@@ -34,7 +33,7 @@ extension Binary.Machine {
 extension Binary.Machine.Fault {
 
     @inlinable
-    public func asEndOfInputError(for typeName: String) -> Parser.EndOfInput.Error {
+    public func asEndOfInputError(for typeName: String) -> Parser::EndOfInput.Error {
         switch self {
         case .insufficientBytes(let need, let have):
             return .unexpected(

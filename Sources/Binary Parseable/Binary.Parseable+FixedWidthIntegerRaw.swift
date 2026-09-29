@@ -1,5 +1,4 @@
 public import Binary
-public import Binary
 public import Byte
 
 extension Binary.Parseable where Self: RawRepresentable, Self.RawValue: FixedWidthInteger {

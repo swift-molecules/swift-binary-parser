@@ -1,5 +1,5 @@
-internal import Binary_LEB128_Decode
-public import Byte
+public import Cursor
+internal import Binary
 public import Byte
 public import Cardinal
 internal import Index
@@ -8,26 +8,25 @@ public import Ordinal
 public import Parser
 
 @inline(__always)
-private func advanceProvenInBounds<Input: Input.Input.`Protocol`>(
+private func advanceProvenInBounds<Input: Cursor.`Protocol` & Swift.Collection>(
     _ input: inout Input
-) -> Input.Element where Input.Element == Byte, Input.Checkpoint == Index<Byte> {
-    do {
-        return try input.advance()
-    } catch {
-        preconditionFailure("advance() threw after a bounds check proved it could not: \(error)")
+) -> Input.Element where Input.Element == Byte, Input.Failure == Never {
+    guard let value = input.next() else {
+        preconditionFailure("next() returned nil after the cursor bounds check")
     }
+    return value
 }
 
 extension Binary.Machine {
 
     @usableFromInline
-    static func run<Input: Input.Input.`Protocol`, Output>(
+    static func run<Input: Cursor.`Protocol` & Swift.Collection, Output>(
         program: Program,
         root: Node.ID,
         input: inout Input,
         as outputType: Output.Type
-    ) throws(Fault) -> Output where Input.Element == Byte, Input.Checkpoint == Index<Byte> {
-        typealias Frame = Binary.Machine.Frame
+    ) throws(Fault) -> Output where Input.Element == Byte, Input.Failure == Never {
+        typealias Frame = Binary.Machine.Frame<Input.Checkpoint>
         typealias Value = Binary.Machine.Value
         typealias Node = Binary.Machine.Node
 
@@ -184,7 +183,7 @@ extension Binary.Machine {
 
             switch node {
             case .leaf(let instruction):
-                let remaining = input.count
+                let remaining = Index<Byte>.Count(Cardinal(UInt(input.count)))
 
                 switch instruction {
                 case .take1:
@@ -210,7 +209,7 @@ extension Binary.Machine {
                     if remaining < need {
                         instructionError = .insufficientBytes(need: need, have: remaining)
                     } else {
-                        input.advance(by: need)
+                        for _ in 0..<n { _ = advanceProvenInBounds(&input) }
                         pendingHandle = arena.allocate(Value.make(()))
                     }
 
@@ -637,10 +636,10 @@ extension Binary.Machine {
 extension Binary.Machine.Parser {
 
     @inlinable
-    public func parse<Input: Input.Input.`Protocol`>(
+    public func parse<Input: Cursor.`Protocol` & Swift.Collection>(
         _ input: inout Input
     ) throws(Binary.Machine.Fault) -> Output
-    where Input.Element == Byte, Input.Checkpoint == Index<Byte> {
+    where Input.Element == Byte, Input.Failure == Never {
         try Binary.Machine.run(program: program, root: root, input: &input, as: Output.self)
     }
 }

@@ -1,5 +1,4 @@
 import Binary
-import Binary
 import Byte
 
 extension UInt32: Binary.Parseable {
