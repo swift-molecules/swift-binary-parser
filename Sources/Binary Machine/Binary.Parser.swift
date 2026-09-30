@@ -1,3 +1,4 @@
+public import Cardinal
 public import Buffer_Linear_Primitive
 public import Buffer_Linear
 public import Byte
@@ -28,7 +29,7 @@ extension Binary.Parser {
         let value = try _parse(&input)
         let remaining = input.count
         guard remaining == .zero else {
-            throw .expectedEnd(remaining: remaining)
+            throw .expectedEnd(remaining: .init(Cardinal(UInt(remaining))))
         }
         return value
     }
