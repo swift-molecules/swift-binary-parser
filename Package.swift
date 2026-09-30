@@ -43,6 +43,7 @@ let package = Package(
         ),
     ],
     dependencies: [
+        .package(url: "https://github.com/swift-atoms/swift-ratio.git", branch: "main", traits: ["Bit", "Ordinal", "Difference"]),
         .package(url: "https://github.com/swift-atoms/swift-ascii.git", branch: "main"),
         .package(
             url: "https://github.com/swift-atoms/swift-parser.git",
