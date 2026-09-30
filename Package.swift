@@ -114,7 +114,11 @@ let package = Package(
         ),
         .testTarget(
             name: "ASCII Decimal Machine Tests",
-            dependencies: ["ASCII Decimal Machine"]
+            dependencies: [
+                "ASCII Decimal Machine",
+                "Binary Machine",
+                .product(name: "Binary", package: "swift-binary"),
+            ]
         ),
 
         .target(

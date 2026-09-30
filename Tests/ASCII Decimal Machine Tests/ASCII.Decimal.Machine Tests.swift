@@ -1,4 +1,6 @@
 import ASCII_Decimal_Machine
+import Binary
+import Binary_Machine
 import Testing
 
 @Suite struct `ASCII Decimal Machine Tests` {
