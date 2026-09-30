@@ -1,5 +1,5 @@
 public import Cursor
-internal import Binary
+public import Binary
 public import Byte
 public import Cardinal
 internal import Index
@@ -333,8 +333,8 @@ extension Binary.Machine {
                             have: remaining
                         )
                     } else {
-                        let b0 = UInt16(advanceProvenInBounds(&input))
-                        let b1 = UInt16(advanceProvenInBounds(&input))
+                        let b0 = UInt16(advanceProvenInBounds(&input).bitPattern)
+                        let b1 = UInt16(advanceProvenInBounds(&input).bitPattern)
                         pendingHandle = arena.allocate(Value.make(b0 | (b1 << 8)))
                     }
 
@@ -345,8 +345,8 @@ extension Binary.Machine {
                             have: remaining
                         )
                     } else {
-                        let b0 = UInt16(advanceProvenInBounds(&input))
-                        let b1 = UInt16(advanceProvenInBounds(&input))
+                        let b0 = UInt16(advanceProvenInBounds(&input).bitPattern)
+                        let b1 = UInt16(advanceProvenInBounds(&input).bitPattern)
                         pendingHandle = arena.allocate(Value.make((b0 << 8) | b1))
                     }
 
@@ -357,10 +357,10 @@ extension Binary.Machine {
                             have: remaining
                         )
                     } else {
-                        let b0 = UInt32(advanceProvenInBounds(&input))
-                        let b1 = UInt32(advanceProvenInBounds(&input))
-                        let b2 = UInt32(advanceProvenInBounds(&input))
-                        let b3 = UInt32(advanceProvenInBounds(&input))
+                        let b0 = UInt32(advanceProvenInBounds(&input).bitPattern)
+                        let b1 = UInt32(advanceProvenInBounds(&input).bitPattern)
+                        let b2 = UInt32(advanceProvenInBounds(&input).bitPattern)
+                        let b3 = UInt32(advanceProvenInBounds(&input).bitPattern)
                         pendingHandle = arena.allocate(
                             Value.make(b0 | (b1 << 8) | (b2 << 16) | (b3 << 24))
                         )
@@ -373,10 +373,10 @@ extension Binary.Machine {
                             have: remaining
                         )
                     } else {
-                        let b0 = UInt32(advanceProvenInBounds(&input))
-                        let b1 = UInt32(advanceProvenInBounds(&input))
-                        let b2 = UInt32(advanceProvenInBounds(&input))
-                        let b3 = UInt32(advanceProvenInBounds(&input))
+                        let b0 = UInt32(advanceProvenInBounds(&input).bitPattern)
+                        let b1 = UInt32(advanceProvenInBounds(&input).bitPattern)
+                        let b2 = UInt32(advanceProvenInBounds(&input).bitPattern)
+                        let b3 = UInt32(advanceProvenInBounds(&input).bitPattern)
                         pendingHandle = arena.allocate(
                             Value.make((b0 << 24) | (b1 << 16) | (b2 << 8) | b3)
                         )
@@ -391,7 +391,7 @@ extension Binary.Machine {
                     } else {
                         var result: UInt64 = 0
                         for i in 0..<8 {
-                            result |= UInt64(advanceProvenInBounds(&input)) << (i * 8)
+                            result |= UInt64(advanceProvenInBounds(&input).bitPattern) << (i * 8)
                         }
                         pendingHandle = arena.allocate(Value.make(result))
                     }
@@ -405,7 +405,7 @@ extension Binary.Machine {
                     } else {
                         var result: UInt64 = 0
                         for _ in 0..<8 {
-                            result = (result << 8) | UInt64(advanceProvenInBounds(&input))
+                            result = (result << 8) | UInt64(advanceProvenInBounds(&input).bitPattern)
                         }
                         pendingHandle = arena.allocate(Value.make(result))
                     }
@@ -415,7 +415,7 @@ extension Binary.Machine {
                         instructionError = .insufficientBytes(need: .one, have: remaining)
                     } else {
                         pendingHandle = arena.allocate(
-                            Value.make(Int8(bitPattern: advanceProvenInBounds(&input)))
+                            Value.make(Int8(bitPattern: advanceProvenInBounds(&input).bitPattern))
                         )
                     }
 
@@ -426,8 +426,8 @@ extension Binary.Machine {
                             have: remaining
                         )
                     } else {
-                        let b0 = UInt16(advanceProvenInBounds(&input))
-                        let b1 = UInt16(advanceProvenInBounds(&input))
+                        let b0 = UInt16(advanceProvenInBounds(&input).bitPattern)
+                        let b1 = UInt16(advanceProvenInBounds(&input).bitPattern)
                         pendingHandle = arena.allocate(
                             Value.make(Int16(bitPattern: b0 | (b1 << 8)))
                         )
@@ -440,8 +440,8 @@ extension Binary.Machine {
                             have: remaining
                         )
                     } else {
-                        let b0 = UInt16(advanceProvenInBounds(&input))
-                        let b1 = UInt16(advanceProvenInBounds(&input))
+                        let b0 = UInt16(advanceProvenInBounds(&input).bitPattern)
+                        let b1 = UInt16(advanceProvenInBounds(&input).bitPattern)
                         pendingHandle = arena.allocate(
                             Value.make(Int16(bitPattern: (b0 << 8) | b1))
                         )
@@ -454,10 +454,10 @@ extension Binary.Machine {
                             have: remaining
                         )
                     } else {
-                        let b0 = UInt32(advanceProvenInBounds(&input))
-                        let b1 = UInt32(advanceProvenInBounds(&input))
-                        let b2 = UInt32(advanceProvenInBounds(&input))
-                        let b3 = UInt32(advanceProvenInBounds(&input))
+                        let b0 = UInt32(advanceProvenInBounds(&input).bitPattern)
+                        let b1 = UInt32(advanceProvenInBounds(&input).bitPattern)
+                        let b2 = UInt32(advanceProvenInBounds(&input).bitPattern)
+                        let b3 = UInt32(advanceProvenInBounds(&input).bitPattern)
                         pendingHandle = arena.allocate(
                             Value.make(Int32(bitPattern: b0 | (b1 << 8) | (b2 << 16) | (b3 << 24)))
                         )
@@ -470,10 +470,10 @@ extension Binary.Machine {
                             have: remaining
                         )
                     } else {
-                        let b0 = UInt32(advanceProvenInBounds(&input))
-                        let b1 = UInt32(advanceProvenInBounds(&input))
-                        let b2 = UInt32(advanceProvenInBounds(&input))
-                        let b3 = UInt32(advanceProvenInBounds(&input))
+                        let b0 = UInt32(advanceProvenInBounds(&input).bitPattern)
+                        let b1 = UInt32(advanceProvenInBounds(&input).bitPattern)
+                        let b2 = UInt32(advanceProvenInBounds(&input).bitPattern)
+                        let b3 = UInt32(advanceProvenInBounds(&input).bitPattern)
                         pendingHandle = arena.allocate(
                             Value.make(Int32(bitPattern: (b0 << 24) | (b1 << 16) | (b2 << 8) | b3))
                         )
@@ -488,7 +488,7 @@ extension Binary.Machine {
                     } else {
                         var result: UInt64 = 0
                         for i in 0..<8 {
-                            result |= UInt64(advanceProvenInBounds(&input)) << (i * 8)
+                            result |= UInt64(advanceProvenInBounds(&input).bitPattern) << (i * 8)
                         }
                         pendingHandle = arena.allocate(Value.make(Int64(bitPattern: result)))
                     }
@@ -502,7 +502,7 @@ extension Binary.Machine {
                     } else {
                         var result: UInt64 = 0
                         for _ in 0..<8 {
-                            result = (result << 8) | UInt64(advanceProvenInBounds(&input))
+                            result = (result << 8) | UInt64(advanceProvenInBounds(&input).bitPattern)
                         }
                         pendingHandle = arena.allocate(Value.make(Int64(bitPattern: result)))
                     }
