@@ -1,3 +1,4 @@
+public import Binary
 public import Checkpoint
 public import Byte
 import Index

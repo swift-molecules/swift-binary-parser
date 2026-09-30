@@ -1,3 +1,4 @@
+public import Binary
 extension Binary.Machine {
 
     @inlinable

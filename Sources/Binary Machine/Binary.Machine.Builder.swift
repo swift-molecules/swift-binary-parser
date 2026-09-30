@@ -1,3 +1,4 @@
+public import Binary
 public import Machine
 public import Vector
 
