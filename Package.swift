@@ -43,6 +43,7 @@ let package = Package(
         ),
     ],
     dependencies: [
+        .package(url: "https://github.com/swift-molecules/swift-graph.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-ratio.git", branch: "main", traits: ["Bit", "Ordinal", "Difference"]),
         .package(url: "https://github.com/swift-atoms/swift-ascii.git", branch: "main"),
         .package(
@@ -118,6 +119,7 @@ let package = Package(
         .target(
             name: "Binary Machine",
             dependencies: [
+                .product(name: "Graph", package: "swift-graph"),
                 .product(name: "Byte", package: "swift-byte"),
                 .product(name: "Cursor", package: "swift-cursor"),
                 .product(name: "Cursor", package: "swift-cursor"),
