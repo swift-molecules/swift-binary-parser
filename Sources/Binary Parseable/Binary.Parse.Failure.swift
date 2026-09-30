@@ -1,3 +1,4 @@
+public import Binary
 public import Binary_Parse
 
 extension Binary.Parse {

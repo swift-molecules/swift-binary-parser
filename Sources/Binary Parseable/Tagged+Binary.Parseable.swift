@@ -1,3 +1,4 @@
+public import Binary
 @_spi(Internal) import Tagged
 
 extension Tagged: Binary.Parseable where Underlying: Binary.Parseable {

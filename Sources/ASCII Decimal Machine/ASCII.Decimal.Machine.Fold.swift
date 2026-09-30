@@ -1,3 +1,4 @@
+public import Binary
 internal import ASCII
 internal import Binary_Machine
 

@@ -1,3 +1,4 @@
+public import Binary
 public import Byte
 public import Index
 public import Ordinal

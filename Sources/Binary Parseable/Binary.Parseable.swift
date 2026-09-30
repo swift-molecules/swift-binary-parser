@@ -1,3 +1,4 @@
+public import Binary
 public import Binary_Parse
 import Byte
 

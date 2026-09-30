@@ -1,3 +1,4 @@
+public import Binary
 extension ArraySlice: Binary.Parseable where Element == Byte {
 
     public static func parse<Source: RangeReplaceableCollection>(

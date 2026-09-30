@@ -106,6 +106,7 @@ let package = Package(
         .target(
             name: "ASCII Decimal Machine",
             dependencies: [
+                .product(name: "Binary", package: "swift-binary"),
                 "Binary Machine",
                 .product(name: "ASCII", package: "swift-ascii"),
                 .product(name: "Byte", package: "swift-byte"),

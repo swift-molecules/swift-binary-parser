@@ -1,3 +1,4 @@
+public import Binary
 public import ASCII
 public import Binary_Machine
 internal import Byte
