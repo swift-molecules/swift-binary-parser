@@ -87,7 +87,8 @@ let package = Package(
         ),
         .package(
             url: "https://github.com/swift-atoms/swift-span.git",
-            branch: "main"
+            branch: "main",
+            traits: ["Iterator"]
         ),
         .package(
             url: "https://github.com/swift-molecules/swift-buffer-linear.git",
