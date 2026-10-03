@@ -127,7 +127,6 @@ let package = Package(
                 .product(name: "Graph", package: "swift-graph"),
                 .product(name: "Byte", package: "swift-byte"),
                 .product(name: "Cursor", package: "swift-cursor"),
-                .product(name: "Cursor", package: "swift-cursor"),
                 .product(name: "Machine", package: "swift-machine"),
                 .product(name: "Vector", package: "swift-vector"),
                 .product(
@@ -155,7 +154,6 @@ let package = Package(
                 "Binary Machine",
                 .product(name: "Byte", package: "swift-byte"),
                 .product(name: "Cursor", package: "swift-cursor"),
-                .product(name: "Cursor", package: "swift-cursor"),
                 .product(name: "Vector", package: "swift-vector"),
 
                 .product(name: "Span", package: "swift-span"),
@@ -174,7 +172,6 @@ let package = Package(
                 .product(name: "Either", package: "swift-either"),
                 .product(name: "Parser", package: "swift-parser"),
                 .product(name: "Byte", package: "swift-byte"),
-                .product(name: "Cursor", package: "swift-cursor"),
                 .product(name: "Cursor", package: "swift-cursor"),
                 .product(name: "Index", package: "swift-index"),
                 .product(name: "Cardinal", package: "swift-cardinal"),
