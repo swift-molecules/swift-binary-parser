@@ -27,11 +27,6 @@ extension Binary.Parse.Validated {
 extension Binary.Parse.Validated.Error: Sendable where T.RawValue: Sendable {}
 
 extension Binary.Parse.Validated: Parsing {
-    public var body: Never {
-        borrowing get {
-            return fatalError("\(Self.self) is a leaf: implement its conformance requirements directly")
-        }
-    }
 
     public typealias Input = ArraySlice<Byte>
 
