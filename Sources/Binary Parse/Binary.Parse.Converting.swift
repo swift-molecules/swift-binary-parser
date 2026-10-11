@@ -16,7 +16,7 @@ extension Binary.Parse {
 
 extension Binary.Parse.Converting {
 
-    public enum Error: Swift.Error {
+    public enum Error: Swift::Error {
 
         case endOfInput(expected: String)
 

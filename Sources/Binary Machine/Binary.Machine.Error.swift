@@ -7,7 +7,7 @@ public import Parser
 
 extension Binary.Machine {
 
-    public enum Fault: Swift.Error, Sendable, Equatable {
+    public enum Fault: Swift::Error, Sendable, Equatable {
 
         case insufficientBytes(need: Index<Byte>.Count, have: Index<Byte>.Count)
 

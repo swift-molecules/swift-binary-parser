@@ -7,11 +7,11 @@ public import Parser
 extension Binary.Parse.Access {
 
     @inlinable
-    public func whole<Bytes: Swift.Collection>(
+    public func whole<Bytes: Swift::Collection>(
         _ bytes: Bytes
     ) throws(Either<P.Failure, Binary.Parse.Error>) -> P.Output
     where Bytes.Element == Byte {
-        var input = Swift.Array(bytes)[...]
+        var input = Swift::Array(bytes)[...]
         let value: P.Output
         do throws(P.Failure) {
             value = try parser.parse(&input)

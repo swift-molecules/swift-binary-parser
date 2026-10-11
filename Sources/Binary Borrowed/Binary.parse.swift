@@ -64,7 +64,7 @@ extension Span.`Protocol` where Self: ~Copyable & ~Escapable, Element == Byte {
 extension Binary {
 
     @inlinable
-    public static func withInput<T, E: Swift.Error>(
+    public static func withInput<T, E: Swift::Error>(
         _ bytes: [Byte],
         _ body: (inout ArraySlice<Byte>) throws(E) -> T
     ) throws(E) -> T {
@@ -73,16 +73,16 @@ extension Binary {
     }
 
     @inlinable
-    public static func withInput<Bytes, T, E: Swift.Error>(
+    public static func withInput<Bytes, T, E: Swift::Error>(
         _ bytes: Bytes,
         _ body: (inout ArraySlice<Byte>) throws(E) -> T
-    ) throws(E) -> T where Bytes: Swift.Collection, Bytes.Element == Byte {
+    ) throws(E) -> T where Bytes: Swift::Collection, Bytes.Element == Byte {
         var input = Array(bytes)[...]
         return try body(&input)
     }
 
     @inlinable
-    public static func withInput<T, E: Swift.Error>(
+    public static func withInput<T, E: Swift::Error>(
         _ string: some StringProtocol,
         _ body: (inout ArraySlice<Byte>) throws(E) -> T
     ) throws(E) -> T {

@@ -328,7 +328,7 @@ extension Binary.Machine {
         _ expr: Expression<T>,
         in builder: inout Builder
     ) -> Expression<T?> {
-        let wrapSome: (T) -> T? = { Swift.Optional.some($0) }
+        let wrapSome: (T) -> T? = { Swift::Optional.some($0) }
         let captureID = builder.captures.insert(wrapSome)
         let node = Node.optional(
             child: expr.node,

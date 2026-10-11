@@ -8,7 +8,7 @@ public import Ordinal
 public import Parser
 
 @inline(__always)
-private func advanceProvenInBounds<Input: Cursor.`Protocol` & Swift.Collection>(
+private func advanceProvenInBounds<Input: Cursor.`Protocol` & Swift::Collection>(
     _ input: inout Input
 ) -> Input.Element where Input.Element == Byte, Input.Failure == Never {
     guard let value = input.next() else {
@@ -20,7 +20,7 @@ private func advanceProvenInBounds<Input: Cursor.`Protocol` & Swift.Collection>(
 extension Binary.Machine {
 
     @usableFromInline
-    static func run<Input: Cursor.`Protocol` & Swift.Collection, Output>(
+    static func run<Input: Cursor.`Protocol` & Swift::Collection, Output>(
         program: Program,
         root: Node.ID,
         input: inout Input,
@@ -636,7 +636,7 @@ extension Binary.Machine {
 extension Binary.Machine.Parser {
 
     @inlinable
-    public func parse<Input: Cursor.`Protocol` & Swift.Collection>(
+    public func parse<Input: Cursor.`Protocol` & Swift::Collection>(
         _ input: inout Input
     ) throws(Binary.Machine.Fault) -> Output
     where Input.Element == Byte, Input.Failure == Never {

@@ -107,7 +107,7 @@ let package = Package(
             name: "ASCII Decimal Machine",
             dependencies: [
                 .product(name: "Binary", package: "swift-binary"),
-                "Binary Machine",
+                .target(name: "Binary Machine"),
                 .product(name: "ASCII", package: "swift-ascii"),
                 .product(name: "Byte", package: "swift-byte"),
             ]
@@ -115,8 +115,8 @@ let package = Package(
         .testTarget(
             name: "ASCII Decimal Machine Tests",
             dependencies: [
-                "ASCII Decimal Machine",
-                "Binary Machine",
+                .target(name: "ASCII Decimal Machine"),
+                .target(name: "Binary Machine"),
                 .product(name: "Binary", package: "swift-binary"),
             ]
         ),
@@ -151,7 +151,7 @@ let package = Package(
         .target(
             name: "Binary Borrowed",
             dependencies: [
-                "Binary Machine",
+                .target(name: "Binary Machine"),
                 .product(name: "Byte", package: "swift-byte"),
                 .product(name: "Cursor", package: "swift-cursor"),
                 .product(name: "Vector", package: "swift-vector"),
@@ -183,7 +183,7 @@ let package = Package(
         .target(
             name: "Binary Parseable",
             dependencies: [
-                "Binary Parse",
+                .target(name: "Binary Parse"),
                 .product(name: "Binary", package: "swift-binary"),
                 .product(
                     name: "Binary",
@@ -205,7 +205,7 @@ let package = Package(
         .target(
             name: "Binary Integer",
             dependencies: [
-                "Binary Parse",
+                .target(name: "Binary Parse"),
                 .product(name: "Binary", package: "swift-binary"),
                 .product(name: "Parser", package: "swift-parser"),
                 .product(name: "Cursor", package: "swift-cursor"),
@@ -217,11 +217,11 @@ let package = Package(
             name: "Binary Parser",
             dependencies: [
 
-                "Binary Machine",
-                "Binary Borrowed",
-                "Binary Parse",
-                "Binary Parseable",
-                "Binary Integer",
+                .target(name: "Binary Machine"),
+                .target(name: "Binary Borrowed"),
+                .target(name: "Binary Parse"),
+                .target(name: "Binary Parseable"),
+                .target(name: "Binary Integer"),
                 .product(name: "Binary", package: "swift-binary"),
                 .product(name: "Parser", package: "swift-parser"),
                 .product(name: "Cursor", package: "swift-cursor"),
@@ -232,8 +232,8 @@ let package = Package(
         .target(
             name: "Binary Parser Test Support",
             dependencies: [
-                "Binary Parser",
-                "Binary Parseable",
+                .target(name: "Binary Parser"),
+                .target(name: "Binary Parseable"),
                 .product(
                     name: "Binary Test Support",
                     package: "swift-binary"
@@ -248,7 +248,7 @@ let package = Package(
         ),
         .testTarget(
             name: "Binary Borrowed Tests",
-            dependencies: ["Binary Parser Test Support"]
+            dependencies: [.target(name: "Binary Parser Test Support")]
         ),
     ],
     swiftLanguageModes: [.v6]

@@ -16,7 +16,7 @@ extension Binary.Parse {
 
 extension Binary.Parse.Validated {
 
-    public enum Error: Swift.Error {
+    public enum Error: Swift::Error {
 
         case endOfInput(expected: String)
 
