@@ -1,8 +1,8 @@
-public import Cardinal
-public import Buffer_Linear_Primitive
-public import Buffer_Linear
-public import Byte
 public import Binary
+public import Buffer_Linear
+public import Buffer_Linear_Primitive
+public import Byte
+public import Cardinal
 public import Cursor
 public import Ownership_Shared_Primitive
 

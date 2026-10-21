@@ -1,6 +1,6 @@
 public import Binary
-public import Checkpoint
 public import Byte
+public import Checkpoint
 import Index
 public import Machine
 

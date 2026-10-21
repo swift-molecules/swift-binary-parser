@@ -1,7 +1,7 @@
-public import Cursor
 public import Binary
 public import Byte
 public import Cardinal
+public import Cursor
 internal import Index
 public import Machine
 public import Ordinal

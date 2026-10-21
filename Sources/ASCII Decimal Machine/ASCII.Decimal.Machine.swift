@@ -1,5 +1,5 @@
-public import Binary
 public import ASCII
+public import Binary
 public import Binary_Machine
 internal import Byte
 
@@ -26,7 +26,10 @@ extension ASCII.Decimal.Machine {
             let negative = Binary.Machine.oneOf([minus, plus, absent], in: &builder)
             let digits = magnitude(T.Magnitude.self, in: &builder)
             let signedMagnitude = Binary.Machine.sequence(
-                negative, digits, combine: { ($0, $1) }, in: &builder
+                negative,
+                digits,
+                combine: { ($0, $1) },
+                in: &builder
             )
             return signedMagnitude.tryMap(
                 { pair throws(Binary.Machine.Fault) -> T in
@@ -41,7 +44,8 @@ extension ASCII.Decimal.Machine {
     }
 
     private static func magnitude<U: FixedWidthInteger & UnsignedInteger>(
-        _ type: U.Type, in builder: inout Binary.Machine.Builder
+        _ type: U.Type,
+        in builder: inout Binary.Machine.Builder
     ) -> Binary.Machine.Expression<U> {
         let digit = Binary.Machine.take1(in: &builder).tryMap(
             { byte throws(Binary.Machine.Fault) -> U in
@@ -52,10 +56,16 @@ extension ASCII.Decimal.Machine {
             in: &builder
         )
         let suffix = Binary.Machine.fold(
-            digit, initial: Fold<U>(), combine: { $0.appending($1) }, in: &builder
+            digit,
+            initial: Fold<U>(),
+            combine: { $0.appending($1) },
+            in: &builder
         )
         let number = Binary.Machine.sequence(
-            digit, suffix, combine: { ($0, $1) }, in: &builder
+            digit,
+            suffix,
+            combine: { ($0, $1) },
+            in: &builder
         )
 
         return number.tryMap(
