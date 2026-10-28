@@ -189,15 +189,7 @@ let package = Package(
             dependencies: [
                 .target(name: "Binary Parse"),
                 .product(name: "Binary", package: "swift-binary"),
-                .product(
-                    name: "Binary",
-                    package: "swift-binary"
-                ),
                 .product(name: "Byte", package: "swift-byte"),
-                .product(
-                    name: "Byte",
-                    package: "swift-byte"
-                ),
                 .product(name: "Cardinal", package: "swift-cardinal"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
                 .product(name: "Parser", package: "swift-parser"),
