@@ -42,6 +42,9 @@ let package = Package(
             targets: ["Binary Parser Test Support"]
         ),
     ],
+    traits: [
+        .trait(name: "ASCIIDecimalMachine", description: "ASCII Decimal Machine and the dependencies only it needs"),
+    ],
     dependencies: [
         .package(url: "https://github.com/swift-molecules/swift-graph.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-ratio.git", branch: "main", traits: ["Bit", "Ordinal", "Difference"]),
@@ -105,9 +108,6 @@ let package = Package(
             branch: "main"
         ),
         .package(url: "https://github.com/swift-atoms/swift-checkpoint.git", branch: "main"),
-    ],
-    traits: [
-        .trait(name: "ASCIIDecimalMachine", description: "ASCII Decimal Machine and the dependencies only it needs"),
     ],
     targets: [
         .target(
