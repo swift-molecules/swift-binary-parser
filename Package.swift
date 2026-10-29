@@ -43,7 +43,10 @@ let package = Package(
         ),
     ],
     traits: [
-        .trait(name: "ASCIIDecimalMachine", description: "ASCII Decimal Machine and the dependencies only it needs"),
+        .trait(
+            name: "ASCIIDecimalMachine",
+            description: "ASCII Decimal Machine and the dependencies only it needs"
+        ),
     ],
     dependencies: [
         .package(url: "https://github.com/swift-molecules/swift-graph.git", branch: "main"),
