@@ -2,7 +2,7 @@ public import Binary
 public import Cardinal
 public import Index
 public import Ordinal
-public import Parser
+import Parser
 
 extension Binary.Parse.Access {
 

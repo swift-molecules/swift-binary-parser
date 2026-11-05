@@ -1,7 +1,7 @@
 public import Binary
 public import Byte
 public import Index
-public import Machine
+import Machine
 public import Ordinal
 public import Parser
 

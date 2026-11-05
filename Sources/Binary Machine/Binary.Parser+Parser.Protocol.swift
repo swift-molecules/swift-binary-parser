@@ -1,6 +1,6 @@
 public import Binary
 public import Byte
-public import Cursor
+import Cursor
 
 extension Binary.Parser: Parsing {
 

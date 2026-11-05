@@ -1,8 +1,8 @@
 public import Binary
-public import Byte
-public import Cardinal
-public import Cursor
-public import Ordinal
+import Byte
+import Cardinal
+import Cursor
+import Ordinal
 
 extension RawRepresentable where RawValue: FixedWidthInteger {
 

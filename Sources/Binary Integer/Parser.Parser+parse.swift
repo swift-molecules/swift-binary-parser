@@ -1,5 +1,5 @@
 public import Binary
-public import Parser
+import Parser
 
 extension Parsing where Input == ArraySlice<Byte> {
 

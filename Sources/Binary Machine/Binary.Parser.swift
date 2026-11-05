@@ -1,10 +1,10 @@
 public import Binary
-public import Buffer_Linear
-public import Buffer_Linear_Primitive
+import Buffer_Linear
+import Buffer_Linear_Primitive
 public import Byte
 public import Cardinal
 public import Cursor
-public import Ownership_Shared_Primitive
+import Ownership_Shared_Primitive
 
 extension Binary {
 

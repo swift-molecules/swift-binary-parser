@@ -1,7 +1,7 @@
 public import Binary
 public import Graph
 public import Machine
-public import Vector
+import Vector
 
 extension Binary.Machine {
 

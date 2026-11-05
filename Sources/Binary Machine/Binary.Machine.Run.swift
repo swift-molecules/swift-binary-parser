@@ -1,11 +1,11 @@
 public import Binary
 public import Byte
-public import Cardinal
+import Cardinal
 public import Cursor
 internal import Index
 public import Machine
-public import Ordinal
-public import Parser
+import Ordinal
+import Parser
 
 @inline(__always)
 private func advanceProvenInBounds<Input: Cursor.`Protocol` & Swift::Collection>(
