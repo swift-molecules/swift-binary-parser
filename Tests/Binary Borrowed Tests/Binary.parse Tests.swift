@@ -6,7 +6,9 @@ import Testing
 
 @testable import Binary_Parser
 
-extension Binary {
+enum `Binary Tests` {}
+
+extension `Binary Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
@@ -14,7 +16,7 @@ extension Binary {
     }
 }
 
-extension Binary.Test.Unit {
+extension `Binary Tests`.Test.Unit {
 
     @Test
     func `byte-span parse u8 returns first byte`() throws {
@@ -138,7 +140,7 @@ extension Binary.Test.Unit {
     }
 }
 
-extension Binary.Test.`Edge Case` {
+extension `Binary Tests`.Test.`Edge Case` {
 
     @Test
     func `byte-span parse throws insufficientBytes when input shorter than needed`() {
@@ -170,7 +172,7 @@ extension Binary.Test.`Edge Case` {
     }
 }
 
-extension Binary.Test.Unit {
+extension `Binary Tests`.Test.Unit {
 
     @Test
     func `Binary.withInput from byte array hands the body a byte slice`() {
