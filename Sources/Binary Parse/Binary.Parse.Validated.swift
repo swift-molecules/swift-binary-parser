@@ -15,13 +15,6 @@ extension Binary.Parse {
 }
 
 extension Binary.Parse.Validated {
-
-    public enum Error: Swift::Error {
-
-        case endOfInput(expected: String)
-
-        case invalid(rawValue: T.RawValue)
-    }
 }
 
 extension Binary.Parse.Validated.Error: Sendable where T.RawValue: Sendable {}

@@ -17,25 +17,7 @@ extension Binary.Machine {
         }
     }
 
-    public struct Expression<Output> {
-        @usableFromInline
-        let node: Node.ID
 
-        @usableFromInline
-        init(node: Node.ID) {
-            self.node = node
-        }
-    }
-
-    public struct Reference<Output> {
-        @usableFromInline
-        let node: Node.ID
-
-        @usableFromInline
-        init(node: Node.ID) {
-            self.node = node
-        }
-    }
 }
 
 extension Binary.Machine.Builder {

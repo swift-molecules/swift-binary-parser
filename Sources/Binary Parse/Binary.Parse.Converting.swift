@@ -15,13 +15,6 @@ extension Binary.Parse {
 }
 
 extension Binary.Parse.Converting {
-
-    public enum Error: Swift::Error {
-
-        case endOfInput(expected: String)
-
-        case overflow(source: Source)
-    }
 }
 
 extension Binary.Parse.Converting.Error: Sendable where Source: Sendable {}
