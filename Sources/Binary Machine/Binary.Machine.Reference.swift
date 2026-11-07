@@ -1,10 +1,10 @@
 public import Binary
-public import Graph
+import Graph
 public import Machine
 import Vector
 
 public import Binary
-public import Graph
+import Graph
 public import Machine
 import Vector
 
