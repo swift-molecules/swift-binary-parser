@@ -7,7 +7,11 @@ import Testing
 
 @Suite("Binary.LEB128 Interpreter")
 struct BinaryLEB128InterpreterTests {
+}
+
+extension BinaryLEB128InterpreterTests {
     @Suite struct Prefix {}
+
     @Suite struct Whole {}
 }
 
