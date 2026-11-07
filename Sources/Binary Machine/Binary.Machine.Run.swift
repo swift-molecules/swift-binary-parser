@@ -390,7 +390,7 @@ extension Binary.Machine {
                         )
                     } else {
                         var result: UInt64 = 0
-                        for i in 0..<8 {
+                        (0..<8).forEach { i in
                             result |= UInt64(advanceProvenInBounds(&input).bitPattern) << (i * 8)
                         }
                         pendingHandle = arena.allocate(Value.make(result))
@@ -487,7 +487,7 @@ extension Binary.Machine {
                         )
                     } else {
                         var result: UInt64 = 0
-                        for i in 0..<8 {
+                        (0..<8).forEach { i in
                             result |= UInt64(advanceProvenInBounds(&input).bitPattern) << (i * 8)
                         }
                         pendingHandle = arena.allocate(Value.make(Int64(bitPattern: result)))

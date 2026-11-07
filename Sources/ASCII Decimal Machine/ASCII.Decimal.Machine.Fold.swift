@@ -1,6 +1,6 @@
 #if ASCIIDecimalMachine
     internal import ASCII
-    public import Binary
+    import Binary
     internal import Binary_Machine
 
     extension ASCII.Decimal.Machine {
