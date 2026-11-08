@@ -116,10 +116,10 @@ let package = Package(
         .target(
             name: "ASCII Decimal Machine",
             dependencies: [
-                .product(name: "Binary", package: "swift-binary", condition: .when(traits: ["ASCIIDecimalMachine"])),
+                .product(name: "Binary", package: "swift-binary"),
                 .target(name: "Binary Machine"),
                 .product(name: "ASCII", package: "swift-ascii", condition: .when(traits: ["ASCIIDecimalMachine"])),
-                .product(name: "Byte", package: "swift-byte", condition: .when(traits: ["ASCIIDecimalMachine"])),
+                .product(name: "Byte", package: "swift-byte"),
             ]
         ),
         .testTarget(
