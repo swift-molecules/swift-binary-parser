@@ -45,32 +45,34 @@ private func sliced(_ encoded: [Byte]) -> Outcome {
     }
 }
 
-@Suite
-struct `Binary.parse Differential Tests` {
+extension `Binary.parse Differential Tests`.`Binary.parse Differential Tests` {
+    @Suite
+    struct `Binary.parse Differential Tests` {
 
-    @Test(arguments: [
-        bytes(0x01, 0x02),
-        bytes(0x01, 0x02, 0x03),
-        bytes(0x01, 0x03),
-        bytes(0x01),
-        bytes(0x02),
-        bytes(),
-    ])
-    func `span entry points agree with the slice runner`(_ encoded: [Byte]) {
-        #expect(borrowed(encoded) == sliced(encoded))
-    }
-
-    @Test
-    func `a failed alternative rolls back before the next one`() {
-        #expect(borrowed(bytes(0x01, 0x03)) == Outcome(result: .success(bytes(0x01)), consumed: 1))
-    }
-
-    @Test
-    func `the output outlives the source span`() throws {
-        func parsed() throws(Binary.Machine.Fault) -> [Byte] {
-            let encoded = bytes(0x01, 0x02, 0x09)
-            return try encoded.span.parse(alternatives())
+        @Test(arguments: [
+            bytes(0x01, 0x02),
+            bytes(0x01, 0x02, 0x03),
+            bytes(0x01, 0x03),
+            bytes(0x01),
+            bytes(0x02),
+            bytes(),
+        ])
+        func `span entry points agree with the slice runner`(_ encoded: [Byte]) {
+            #expect(borrowed(encoded) == sliced(encoded))
         }
-        #expect(try parsed() == bytes(0x01, 0x02))
+
+        @Test
+        func `a failed alternative rolls back before the next one`() {
+            #expect(borrowed(bytes(0x01, 0x03)) == Outcome(result: .success(bytes(0x01)), consumed: 1))
+        }
+
+        @Test
+        func `the output outlives the source span`() throws {
+            func parsed() throws(Binary.Machine.Fault) -> [Byte] {
+                let encoded = bytes(0x01, 0x02, 0x09)
+                return try encoded.span.parse(alternatives())
+            }
+            #expect(try parsed() == bytes(0x01, 0x02))
+        }
     }
 }
