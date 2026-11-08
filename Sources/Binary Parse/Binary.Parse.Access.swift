@@ -1,8 +1,8 @@
 public import Binary
-import Parser
 public import Cardinal
 public import Index
 public import Ordinal
+import Parser
 
 extension Binary.Parse {
 

@@ -3,7 +3,6 @@ import Graph
 public import Machine
 import Vector
 
-
 extension Binary.Machine {
     public struct Reference<Output> {
         @usableFromInline

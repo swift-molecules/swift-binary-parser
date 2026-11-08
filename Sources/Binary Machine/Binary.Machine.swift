@@ -1,8 +1,8 @@
 public import Binary
-public import Machine
 public import Byte
 public import Checkpoint
 import Index
+public import Machine
 import Tagged
 
 extension Binary {

@@ -17,7 +17,6 @@ extension Binary.Machine {
         }
     }
 
-
 }
 
 extension Binary.Machine.Builder {
