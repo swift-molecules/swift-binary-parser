@@ -8,13 +8,13 @@ enum `ASCII.Decimal.Machine Tests` {}
 extension `ASCII.Decimal.Machine Tests` {
     @Suite struct `ASCII Decimal Machine Tests` {
         @Test(arguments: ["0", "00", "0000000000000000000000000000000", "255", "00000000000000000000000255"])
-        func unsignedBoundariesAndLeadingZeros(_ text: String) throws {
+        func `unsigned boundaries and leading zeros`(_ text: String) throws {
             let parser = Binary.Parser.machine(ASCII.Decimal.Machine.unsigned(UInt8.self))
             #expect(try parser.parseWhole([Byte](utf8: text)) == UInt8(text))
         }
 
         @Test(arguments: ["256", "999", "1000", "00000000000000000000256"])
-        func unsignedOverflowIsNotAValidShorterPrefix(_ text: String) {
+        func `unsigned overflow is not a valid shorter prefix`(_ text: String) {
             let parser = Binary.Parser.machine(ASCII.Decimal.Machine.unsigned(UInt8.self))
             var input = [Byte](utf8: text + ",tail")[...]
             #expect(throws: Binary.Machine.Fault.outOfRange) { try parser.parsePrefix(&input) }
@@ -22,20 +22,20 @@ extension `ASCII.Decimal.Machine Tests` {
         }
 
         @Test(arguments: ["-128", "127", "+127", "-0", "+0", "-00000000000000000128"])
-        func signedBoundaries(_ text: String) throws {
+        func `signed boundaries`(_ text: String) throws {
             let parser = Binary.Parser.machine(ASCII.Decimal.Machine.signed(Int8.self))
             #expect(try parser.parseWhole([Byte](utf8: text)) == Int8(text))
         }
 
         @Test(arguments: ["128", "+128", "-129", "256", "-256", "999999999999999999999999"])
-        func signedOverflow(_ text: String) {
+        func `signed overflow`(_ text: String) {
             let parser = Binary.Parser.machine(ASCII.Decimal.Machine.signed(Int8.self))
             #expect(throws: Binary.Machine.Fault.outOfRange) {
                 try parser.parseWhole([Byte](utf8: text))
             }
         }
 
-        @Test func fullWidthLimits() throws {
+        @Test func `full width limits`() throws {
             let unsigned = Binary.Parser.machine(ASCII.Decimal.Machine.unsigned(UInt64.self))
             let signed = Binary.Parser.machine(ASCII.Decimal.Machine.signed(Int64.self))
             #expect(try unsigned.parseWhole([Byte](utf8: String(UInt64.max))) == UInt64.max)
@@ -43,7 +43,7 @@ extension `ASCII.Decimal.Machine Tests` {
             #expect(try signed.parseWhole([Byte](utf8: String(Int64.max))) == Int64.max)
         }
 
-        @Test func fullWidth128BitLimitsAndOverflow() throws {
+        @Test func `full width 128 bit limits and overflow`() throws {
             let unsigned = Binary.Parser.machine(ASCII.Decimal.Machine.unsigned(UInt128.self))
             let signed = Binary.Parser.machine(ASCII.Decimal.Machine.signed(Int128.self))
             #expect(try unsigned.parseWhole([Byte](utf8: String(UInt128.max))) == UInt128.max)
@@ -57,7 +57,7 @@ extension `ASCII.Decimal.Machine Tests` {
             }
         }
 
-        @Test func prefixLeavesDelimiterFromNonzeroSlice() throws {
+        @Test func `prefix leaves delimiter from nonzero slice`() throws {
             let parser = Binary.Parser.machine(ASCII.Decimal.Machine.signed(Int8.self))
             var input = [Byte](utf8: "xx-128,tail").dropFirst(2)
             #expect(try parser.parsePrefix(&input) == -128)
@@ -66,12 +66,12 @@ extension `ASCII.Decimal.Machine Tests` {
         }
 
         @Test(arguments: ["", "+", "-", "x", "--1", "+-1"])
-        func signedRequiresDigits(_ text: String) {
+        func `signed requires digits`(_ text: String) {
             let parser = Binary.Parser.machine(ASCII.Decimal.Machine.signed(Int8.self))
             #expect(throws: Binary.Machine.Fault.self) { try parser.parseWhole([Byte](utf8: text)) }
         }
 
-        @Test func unsignedRejectsSignAndWholeRequiresEnd() {
+        @Test func `unsigned rejects sign and whole requires end`() {
             let parser = Binary.Parser.machine(ASCII.Decimal.Machine.unsigned(UInt8.self))
             #expect(throws: Binary.Machine.Fault.predicateFailed(byte: Byte(bitPattern: 0x2B))) {
                 try parser.parseWhole([Byte](utf8: "+1"))
