@@ -5,7 +5,7 @@ import Testing
 
 @testable import Binary_Parser
 
-@Suite("Binary.LEB128 Interpreter")
+@Suite
 struct BinaryLEB128InterpreterTests {
 }
 
