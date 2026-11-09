@@ -1,6 +1,6 @@
 public import Binary
 public import Byte
-import Machine
+public import Machine
 
 extension Binary.Machine {
 
@@ -47,5 +47,8 @@ extension Binary.Machine {
 
         case uleb128
         case sleb128
+
+        /// Runs another parser's program as one step, against its own nodes and captures.
+        indirect case embedded(Program, root: Node.ID)
     }
 }

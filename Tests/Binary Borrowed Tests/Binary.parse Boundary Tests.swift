@@ -223,4 +223,56 @@ struct `Binary.parse Boundary Tests` {
         #expect(try Tag.parser.parsePrefix(&input) == Tag(rawValue: 0x1234))
         #expect(input == bytes(0x99)[...])
     }
+
+    @Test
+    func `an embedded composite parser keeps its own nodes and captures`() throws {
+        let word = Binary.Machine.build { builder in
+            Binary.Machine.sequence(
+                Binary.Machine.u8(in: &builder),
+                Binary.Machine.u8(in: &builder).map({ Int($0) * 10 }, in: &builder),
+                combine: { high, low in Int(high) * 1000 + low },
+                in: &builder
+            )
+        }
+        let parser = Binary.Machine.build { builder in
+            let marker = Binary.Machine.bytes(bytes(0xFE, 0xFF), in: &builder)
+                .map({ $0.count }, in: &builder)
+            let embedded = builder.embed(word)
+            return Binary.Machine.sequence(
+                marker,
+                embedded.map({ $0 + 1 }, in: &builder),
+                combine: { count, value in "\(count):\(value)" },
+                in: &builder
+            )
+        }
+        let encoded = bytes(0xFE, 0xFF, 0x02, 0x03, 0x09)
+        let prefix = try encoded.span.parsePrefix(parser)
+        #expect(prefix.value == "2:2031")
+        #expect(prefix.count == 4)
+
+        var slice = encoded[...]
+        #expect(try parser.parse(&slice) == "2:2031")
+        #expect(slice == bytes(0x09)[...])
+    }
+
+    @Test
+    func `a fault inside an embedded parser is recovered by the enclosing choice`() throws {
+        let tagged = Binary.Machine.build { builder in
+            Binary.Machine.sequence(
+                Binary.Machine.byte(Byte(bitPattern: 0x01), in: &builder),
+                Binary.Machine.u16le(in: &builder),
+                combine: { _, value in Int(value) },
+                in: &builder
+            )
+        }
+        let parser = Binary.Machine.build { builder in
+            Binary.Machine.oneOf(
+                builder.embed(tagged),
+                Binary.Machine.u8(in: &builder).map({ -Int($0) }, in: &builder),
+                in: &builder
+            )
+        }
+        #expect(try bytes(0x01, 0x34, 0x12).span.parse(parser) == 0x1234)
+        #expect(try bytes(0x01, 0x34).span.parse(parser) == -1)
+    }
 }

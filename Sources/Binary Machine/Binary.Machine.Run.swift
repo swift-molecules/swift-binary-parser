@@ -43,6 +43,14 @@ extension Binary.Machine {
         input: inout Input,
         as outputType: Output.Type
     ) throws(Fault) -> Output where Input.Element == Byte, Input.Failure == Never {
+        try evaluate(program: program, root: root, input: &input)[as: Output.self]
+    }
+
+    static func evaluate<Input: Cursor.`Protocol` & Swift::Collection>(
+        program: Program,
+        root: Node.ID,
+        input: inout Input
+    ) throws(Fault) -> Value where Input.Element == Byte, Input.Failure == Never {
         typealias Frame = Binary.Machine.Frame<Input.Checkpoint>
         typealias Value = Binary.Machine.Value
         typealias Node = Binary.Machine.Node
@@ -64,7 +72,7 @@ extension Binary.Machine {
                 let value = arena.release(handle)
 
                 if frames.isEmpty {
-                    return value[as: Output.self]
+                    return value
                 }
 
                 let frame = frames.removeLast()
@@ -580,6 +588,18 @@ extension Binary.Machine {
                         if done { pendingHandle = arena.allocate(Value.make(result)) }
                     } catch {
                         instructionError = .leb128Overflow
+                    }
+
+                case .embedded(let embeddedProgram, let embeddedRoot):
+                    do throws(Fault) {
+                        let value = try evaluate(
+                            program: embeddedProgram,
+                            root: embeddedRoot,
+                            input: &input
+                        )
+                        pendingHandle = arena.allocate(value)
+                    } catch {
+                        instructionError = error
                     }
                 }
 

@@ -40,11 +40,7 @@ extension Binary.Machine.Builder {
     public mutating func embed<Output>(
         _ parser: Binary.Machine.Parser<Output>
     ) -> Binary.Machine.Expression<Output> {
-        let offset = inner.count
-        for node in parser.program.graph.nodes {
-            _ = inner.allocate(parser.program.graph[node])
-        }
-        let adjustedRoot = parser.root + offset
-        return Binary.Machine.Expression(node: adjustedRoot)
+        let node = Binary.Machine.Node.leaf(.embedded(parser.program, root: parser.root))
+        return Binary.Machine.Expression(node: inner.allocate(node))
     }
 }
