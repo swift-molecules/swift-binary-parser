@@ -20,6 +20,10 @@ private func fault(_ body: () throws(Binary.Machine.Fault) -> Void) -> Binary.Ma
     }
 }
 
+private struct Tag: RawRepresentable, Equatable {
+    var rawValue: UInt16
+}
+
 @Suite
 struct `Binary.parse Boundary Tests` {
 
@@ -204,5 +208,19 @@ struct `Binary.parse Boundary Tests` {
         }
         let encoded = bytes(0x07)
         #expect(try encoded.span.parse(parser) == 7)
+    }
+
+    @Test
+    func `RawRepresentable.parser consumes nothing on short input`() {
+        var input = bytes(0x01)[...]
+        #expect(fault { () throws(Binary.Machine.Fault) in _ = try Tag.parser.parsePrefix(&input) } == .insufficientBytes(need: 2, have: 1))
+        #expect(input == bytes(0x01)[...])
+    }
+
+    @Test
+    func `RawRepresentable.parser decodes little-endian and consumes its width`() throws {
+        var input = bytes(0x34, 0x12, 0x99)[...]
+        #expect(try Tag.parser.parsePrefix(&input) == Tag(rawValue: 0x1234))
+        #expect(input == bytes(0x99)[...])
     }
 }
