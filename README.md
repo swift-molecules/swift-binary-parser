@@ -8,7 +8,7 @@ Use this package to decode byte input into Swift values. For a structured format
 - `Binary.Machine.many` and `Binary.Machine.fold` are greedy and never fail. They stop at the first element that fails, rewind to the end of the last complete element, and return the elements (or accumulator) gathered so far, which may be empty (or `initial`).
 - `Binary.Machine.optional` never fails. If its child fails, even partway through, the input rewinds to where the child started and the result is `nil`.
 - Every fault can be recovered by an enclosing `Binary.Machine.oneOf`, `Binary.Machine.many`, `Binary.Machine.fold` or `Binary.Machine.optional`, the same way input shortfalls are: this includes faults thrown from `tryMap` and depth faults.
-- A child of `Binary.Machine.many` or `Binary.Machine.fold` that succeeds without consuming input repeats forever.
+- `Binary.Machine.many` and `Binary.Machine.fold` also stop at an element that succeeds without consuming input. That element is dropped (not appended, not combined), so `many` over a child that never consumes returns an empty array.
 - If a fault reaches the caller, the input is not rewound. It stays where the failing step left it.
 - `Binary.Machine.recursive(maxDepth:_:)` counts nested entries through its reference. Entering past `maxDepth` faults with `.depthExceeded(limit:)`. A `nil` limit means recursion is unbounded. The interpreter keeps its own frame stack, so deep nesting does not grow the Swift call stack.
 - Unsigned LEB128 and signed LEB128 fault with `.insufficientBytes(need: 1, have: 0)` when the input ends before a terminating byte. They fault with `.leb128Overflow` when the encoding exceeds 64 bits.

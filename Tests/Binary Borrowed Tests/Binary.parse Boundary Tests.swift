@@ -136,4 +136,53 @@ struct `Binary.parse Boundary Tests` {
         let encoded = [Byte](repeating: Byte(bitPattern: 0x80), count: 10) + bytes(0x01)
         #expect(fault { () throws(Binary.Machine.Fault) in _ = try encoded.span.parse(Binary.Machine.uleb128Parser()) } == .leb128Overflow)
     }
+
+    @Test
+    func `many stops at an element that consumes nothing`() throws {
+        let parser = Binary.Machine.build { builder in
+            Binary.Machine.many(
+                Binary.Machine.optional(Binary.Machine.byte(Byte(bitPattern: 0x01), in: &builder), in: &builder),
+                in: &builder
+            )
+        }
+        let encoded = bytes(0x01, 0x01, 0x02)
+        let prefix = try encoded.span.parsePrefix(parser)
+        #expect(prefix.value == [Byte(bitPattern: 0x01), Byte(bitPattern: 0x01)])
+        #expect(prefix.count == 2)
+
+        var slice = encoded[...]
+        #expect(try parser.parse(&slice) == [Byte(bitPattern: 0x01), Byte(bitPattern: 0x01)])
+        #expect(slice.count == 1)
+    }
+
+    @Test
+    func `many over a child that never consumes returns an empty array`() throws {
+        let parser = Binary.Machine.build { builder in
+            Binary.Machine.many(Binary.Machine.pure(1, in: &builder), in: &builder)
+        }
+        let encoded = bytes(0x01)
+        let prefix = try encoded.span.parsePrefix(parser)
+        #expect(prefix.value == [])
+        #expect(prefix.count == .zero)
+    }
+
+    @Test
+    func `fold stops at an element that consumes nothing`() throws {
+        let parser = Binary.Machine.build { builder in
+            Binary.Machine.fold(
+                Binary.Machine.optional(Binary.Machine.u8(in: &builder), in: &builder),
+                initial: 0,
+                combine: { total, next in total + Int(next ?? 100) },
+                in: &builder
+            )
+        }
+        let encoded = bytes(0x01, 0x02)
+        let prefix = try encoded.span.parsePrefix(parser)
+        #expect(prefix.value == 3)
+        #expect(prefix.count == 2)
+
+        var slice = encoded[...]
+        #expect(try parser.parse(&slice) == 3)
+        #expect(slice.isEmpty)
+    }
 }

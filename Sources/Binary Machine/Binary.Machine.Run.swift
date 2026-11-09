@@ -17,6 +17,23 @@ private func advanceProvenInBounds<Input: Cursor.`Protocol` & Swift::Collection>
     return value
 }
 
+/// Whether `input` has moved past `checkpoint`; leaves the position unchanged.
+///
+/// `many` and `fold` stop at an element that succeeds without consuming input,
+/// which would otherwise repeat forever.
+@inline(__always)
+private func advanced<Input: Cursor.`Protocol` & Swift::Collection>(
+    _ input: inout Input,
+    since checkpoint: Input.Checkpoint
+) -> Bool where Input.Failure == Never {
+    let current = input.checkpoint
+    let remaining = input.count
+    input.seek(to: checkpoint)
+    let remainingAtCheckpoint = input.count
+    input.seek(to: current)
+    return remaining != remainingAtCheckpoint
+}
+
 extension Binary.Machine {
 
     @usableFromInline
@@ -84,7 +101,16 @@ extension Binary.Machine {
                 case .oneOf:
                     pendingHandle = arena.allocate(value)
 
-                case .many(let child, _, var resultHandles, let finalize):
+                case .many(let child, let savedCheckpoint, var resultHandles, let finalize):
+                    guard advanced(&input, since: savedCheckpoint) else {
+                        var results: [Value] = []
+                        results.reserveCapacity(resultHandles.count)
+                        for h in resultHandles { results.append(arena.release(h)) }
+                        pendingHandle = arena.allocate(
+                            finalize.finalize(using: program.captures, results)
+                        )
+                        continue interpreterLoop
+                    }
                     resultHandles.append(arena.allocate(value))
                     frames.append(
                         .many(
@@ -97,7 +123,11 @@ extension Binary.Machine {
                     current = child
                     continue interpreterLoop
 
-                case .fold(let child, _, let accHandle, let combine):
+                case .fold(let child, let savedCheckpoint, let accHandle, let combine):
+                    guard advanced(&input, since: savedCheckpoint) else {
+                        pendingHandle = accHandle
+                        continue interpreterLoop
+                    }
                     let acc = arena.release(accHandle)
                     let newAcc = combine.combine(using: program.captures, acc, value)
                     frames.append(
