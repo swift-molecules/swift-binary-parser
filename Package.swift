@@ -250,7 +250,11 @@ let package = Package(
         ),
         .testTarget(
             name: "Binary Borrowed Tests",
-            dependencies: [.target(name: "Binary Parser Test Support")]
+            dependencies: [
+                .target(name: "Binary Parser Test Support"),
+                .target(name: "Binary Machine"),
+                .product(name: "Machine", package: "swift-machine"),
+            ]
         ),
     ],
     swiftLanguageModes: [.v6]

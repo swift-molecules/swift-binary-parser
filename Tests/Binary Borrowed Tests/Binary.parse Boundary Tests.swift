@@ -1,8 +1,10 @@
 import Binary_Parser_Test_Support
 import Byte
+import Machine
 import Span
 import Testing
 
+@testable import Binary_Machine
 @testable import Binary_Parser
 
 private func bytes(_ values: UInt8...) -> [Byte] {
@@ -184,5 +186,23 @@ struct `Binary.parse Boundary Tests` {
         var slice = encoded[...]
         #expect(try parser.parse(&slice) == 3)
         #expect(slice.isEmpty)
+    }
+
+    @Test
+    func `a choice with no alternatives faults instead of trapping`() {
+        let parser: Binary.Machine.Parser<Byte> = Binary.Machine.build { builder in
+            Binary.Machine.Expression(node: builder.allocate(.oneOf([])))
+        }
+        let encoded = bytes(0x01)
+        #expect(fault { () throws(Binary.Machine.Fault) in _ = try encoded.span.parse(parser) } == .noAlternativesMatched)
+    }
+
+    @Test
+    func `a choice with one alternative runs it`() throws {
+        let parser = Binary.Machine.build { builder in
+            Binary.Machine.oneOf(Binary.Machine.u8(in: &builder), in: &builder)
+        }
+        let encoded = bytes(0x07)
+        #expect(try encoded.span.parse(parser) == 7)
     }
 }

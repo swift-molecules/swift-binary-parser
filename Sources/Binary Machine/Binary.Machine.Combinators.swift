@@ -275,10 +275,11 @@ extension Binary.Machine {
 
     @inlinable
     public static func oneOf<Output>(
-        _ alternatives: [Expression<Output>],
+        _ first: Expression<Output>,
+        _ rest: Expression<Output>...,
         in builder: inout Builder
     ) -> Expression<Output> {
-        let nodeIDs = alternatives.map { $0.node }
+        let nodeIDs = [first.node] + rest.map { $0.node }
         let node = Node.oneOf(nodeIDs)
         let nodeID = builder.allocate(node)
         return Expression(node: nodeID)

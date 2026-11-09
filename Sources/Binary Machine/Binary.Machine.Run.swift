@@ -603,7 +603,10 @@ extension Binary.Machine {
                 current = a
 
             case .oneOf(let alternatives):
-                guard !alternatives.isEmpty else { fatalError("Empty oneOf") }
+                guard !alternatives.isEmpty else {
+                    instructionError = .noAlternativesMatched
+                    continue interpreterLoop
+                }
                 if alternatives.count > 1 {
                     frames.append(
                         .oneOf(

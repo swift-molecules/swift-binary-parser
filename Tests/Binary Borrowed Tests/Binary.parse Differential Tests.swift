@@ -12,10 +12,8 @@ private func bytes(_ values: UInt8...) -> [Byte] {
 private func alternatives() -> Binary.Machine.Parser<[Byte]> {
     Binary.Machine.build { builder in
         Binary.Machine.oneOf(
-            [
-                Binary.Machine.bytes(bytes(0x01, 0x02), in: &builder),
-                Binary.Machine.bytes(bytes(0x01), in: &builder),
-            ],
+            Binary.Machine.bytes(bytes(0x01, 0x02), in: &builder),
+            Binary.Machine.bytes(bytes(0x01), in: &builder),
             in: &builder
         )
     }

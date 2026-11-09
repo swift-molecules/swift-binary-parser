@@ -24,7 +24,7 @@
                 let minus = Binary.Machine.byte(Byte(bitPattern: 0x2D), in: &builder).map({ _ in true }, in: &builder)
                 let plus = Binary.Machine.byte(Byte(bitPattern: 0x2B), in: &builder).map({ _ in false }, in: &builder)
                 let absent = Binary.Machine.pure(false, in: &builder)
-                let negative = Binary.Machine.oneOf([minus, plus, absent], in: &builder)
+                let negative = Binary.Machine.oneOf(minus, plus, absent, in: &builder)
                 let digits = magnitude(T.Magnitude.self, in: &builder)
                 let signedMagnitude = Binary.Machine.sequence(
                     negative,
